@@ -563,6 +563,35 @@ const appsData = [
     }
 ];
 
+// Map tool ID to standalone HTML file URL
+const pageMapping = {
+    "img-to-pdf-tool": "image-to-pdf.html",
+    "pdf-text-editor": "pdf-editor.html",
+    "student-gpa-calc": "gpa-calculator.html",
+    "mobile-qr-hub": "qr-generator.html",
+    "word-counter": "word-counter.html",
+    "kids-math-game": "kids-math.html",
+    "unit-converter-tool": "unit-converter.html",
+    "password-generator": "password-generator.html",
+    "scientific-calc": "scientific-calculator.html",
+    "bmi-calculator": "bmi-calculator.html",
+    "loan-emi-calculator": "loan-calculator.html",
+    "age-calculator": "age-calculator.html",
+    "json-formatter": "json-formatter.html",
+    "pomodoro-timer": "pomodoro-timer.html",
+    "color-picker": "color-picker.html",
+    "base64-converter": "base64-encoder.html",
+    "stopwatch-timer": "stopwatch.html",
+    "currency-converter": "currency-converter.html",
+    "markdown-previewer": "markdown-editor.html",
+    "task-kanban": "task-kanban.html",
+    "habit-tracker": "habit-tracker.html",
+    "flashcard-maker": "flashcard-maker.html",
+    "diff-checker": "diff-checker.html",
+    "csv-to-json": "csv-to-json.html",
+    "text-summarizer": "text-summarizer.html"
+};
+
 // 2. DOM Initialization & Event Handlers
 document.addEventListener("DOMContentLoaded", () => {
     const appsGrid = document.getElementById("appsGrid");
@@ -631,6 +660,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const app = appsData.find(a => a.id === id);
         if (!app) return;
 
+        const targetPage = pageMapping[id];
+        const pageLinkHtml = targetPage ? `
+            <a href="${targetPage}" class="btn btn-secondary" style="flex: 1; justify-content: center; text-decoration: none;">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> Dedicated Tool Page
+            </a>
+        ` : '';
+
         modalBody.innerHTML = `
             <div style="text-align: center; margin-bottom: 1.5rem;">
                 <div class="app-icon" style="background-color: ${app.iconBg}; width: 68px; height: 68px; font-size: 2rem; margin: 0 auto 1rem auto;">
@@ -644,9 +680,12 @@ document.addEventListener("DOMContentLoaded", () => {
             <ul style="padding-left: 1.2rem; margin-bottom: 1.5rem; color: var(--text-muted);">
                 ${app.features.map(f => `<li style="margin-bottom: 0.3rem;">${f}</li>`).join('')}
             </ul>
-            <button class="btn btn-primary" style="width: 100%; justify-content: center;" onclick="launchToolInSandbox('${app.id}')">
-                <i class="fa-solid fa-bolt"></i> Launch Active Tool
-            </button>
+            <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
+                <button class="btn btn-primary" style="flex: 1; justify-content: center;" onclick="launchToolInSandbox('${app.id}')">
+                    <i class="fa-solid fa-bolt"></i> Launch Sandbox Tool
+                </button>
+                ${pageLinkHtml}
+            </div>
         `;
         modal.style.display = "flex";
     };
@@ -734,7 +773,7 @@ document.addEventListener("DOMContentLoaded", () => {
         imagePreviewContainer.innerHTML = "";
 
         if (loadedImageFiles.length === 0) {
-            imagePreviewContainer.innerHTML = `<span style="color: var(--text-muted); font-size: 0.85rem;">No images selected yet.</span>`;
+            imagePreviewContainer.innerHTML = `<span style="color: var(--text-muted); font-size: 0.85rem;">No files uploaded. Convert will generate a sample document!</span>`;
             return;
         }
 
@@ -769,21 +808,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (btnConvertImgToPdf) {
         btnConvertImgToPdf.addEventListener("click", () => {
-            if (loadedImageFiles.length === 0) {
-                imgPdfOutput.innerHTML = `<span style="color: var(--danger);">Please select at least one image file first.</span>`;
-                return;
-            }
-
-            imgPdfOutput.innerHTML = `<div style="color: var(--secondary-color);"><i class="fa-solid fa-spinner fa-spin"></i> Converting ${loadedImageFiles.length} image(s) to PDF...</div>`;
-
-            // Use jsPDF or canvas fallback
             const { jsPDF } = window.jspdf || {};
             if (!jsPDF) {
-                imgPdfOutput.innerHTML = `<span style="color: var(--danger);">jsPDF engine loading... Please check internet connection or retry.</span>`;
+                imgPdfOutput.innerHTML = `<span style="color: var(--danger);">jsPDF library loading... Please retry.</span>`;
                 return;
             }
 
             const doc = new jsPDF();
+
+            if (loadedImageFiles.length === 0) {
+                // Instant Trial Sample PDF Generation
+                doc.setFontSize(22);
+                doc.text("VICTORS PDF Document Sample", 20, 30);
+                doc.setFontSize(12);
+                doc.text("This PDF document was generated instantly by VICTORS.", 20, 45);
+                doc.text("Features: Image to PDF, Text Editor, GPA Calculator, QR Code Maker.", 20, 55);
+                doc.save("victors_sample_document.pdf");
+                imgPdfOutput.innerHTML = `
+                    <div style="color: var(--success); font-weight: 700;">
+                        <i class="fa-solid fa-circle-check"></i> Sample PDF generated and downloaded as 'victors_sample_document.pdf'!
+                    </div>
+                `;
+                return;
+            }
+
+            imgPdfOutput.innerHTML = `<div style="color: var(--secondary-color);"><i class="fa-solid fa-spinner fa-spin"></i> Converting ${loadedImageFiles.length} image(s)...</div>`;
             let processedCount = 0;
 
             loadedImageFiles.forEach((file, idx) => {
@@ -793,7 +842,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     img.src = e.target.result;
                     img.onload = function() {
                         if (idx > 0) doc.addPage();
-
                         const pageWidth = doc.internal.pageSize.getWidth();
                         const pageHeight = doc.internal.pageSize.getHeight();
                         const ratio = Math.min(pageWidth / img.width, pageHeight / img.height);
@@ -809,9 +857,8 @@ document.addEventListener("DOMContentLoaded", () => {
                             doc.save("victors_converted_images.pdf");
                             imgPdfOutput.innerHTML = `
                                 <div style="color: var(--success); font-weight: 700;">
-                                    <i class="fa-solid fa-circle-check"></i> Successfully converted ${loadedImageFiles.length} image(s) to PDF!
+                                    <i class="fa-solid fa-circle-check"></i> Converted and downloaded 'victors_converted_images.pdf'!
                                 </div>
-                                <div style="margin-top: 0.4rem; font-size: 0.85rem; color: var(--text-muted);">PDF downloaded automatically as <strong>'victors_converted_images.pdf'</strong>.</div>
                             `;
                         }
                     };
@@ -891,7 +938,7 @@ document.addEventListener("DOMContentLoaded", () => {
         btnDownloadText.addEventListener("click", () => {
             const content = editorTextArea ? editorTextArea.value : "";
             if (!content.trim()) {
-                alert("Editor is empty! Type or upload text first.");
+                alert("Editor is empty!");
                 return;
             }
             const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
@@ -913,7 +960,7 @@ document.addEventListener("DOMContentLoaded", () => {
         btnCalcGrade.addEventListener("click", () => {
             const raw = marksInput.value.trim();
             if (!raw) {
-                gradeResult.innerHTML = `<span style="color: var(--danger);">Enter comma separated marks (e.g. 88, 95, 78).</span>`;
+                gradeResult.innerHTML = `<span style="color: var(--danger);">Enter comma separated marks.</span>`;
                 return;
             }
             const numbers = raw.split(',').map(n => parseFloat(n.trim())).filter(n => !isNaN(n));
@@ -947,7 +994,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const quizAnswer = document.getElementById("quizAnswer");
     const btnCheckQuiz = document.getElementById("btnCheckQuiz");
     const quizFeedback = document.getElementById("quizFeedback");
-    let currentSolution = 0;
+    let currentSolution = 15;
 
     function generateQuiz() {
         if (!quizQuestion) return;
@@ -962,18 +1009,17 @@ document.addEventListener("DOMContentLoaded", () => {
         btnCheckQuiz.addEventListener("click", () => {
             const ans = parseInt(quizAnswer.value.trim(), 10);
             if (isNaN(ans)) {
-                quizFeedback.innerHTML = `<span style="color: var(--danger);">Type your answer number above!</span>`;
+                quizFeedback.innerHTML = `<span style="color: var(--danger);">Please enter your answer.</span>`;
                 return;
             }
 
             if (ans === currentSolution) {
-                quizFeedback.innerHTML = `<span style="color: var(--success); font-weight: 700;"><i class="fa-solid fa-trophy"></i> Outstanding! Correct Answer!</span>`;
+                quizFeedback.innerHTML = `<span style="color: var(--success); font-weight: 700;"><i class="fa-solid fa-trophy"></i> Great job! Correct Answer!</span>`;
                 setTimeout(generateQuiz, 1500);
             } else {
                 quizFeedback.innerHTML = `<span style="color: var(--danger);"><i class="fa-solid fa-xmark"></i> Not ${ans}. Try again!</span>`;
             }
         });
-        generateQuiz();
     }
 
     // ===================================================
@@ -987,7 +1033,7 @@ document.addEventListener("DOMContentLoaded", () => {
         btnGenerateQR.addEventListener("click", () => {
             const text = qrInput.value.trim();
             if (!text) {
-                qrDisplay.innerHTML = `<span style="color: var(--danger);">Enter text or URL first.</span>`;
+                qrDisplay.innerHTML = `<span style="color: var(--danger);">Enter text or URL to generate QR code.</span>`;
                 return;
             }
             const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(text)}`;

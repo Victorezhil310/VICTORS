@@ -1,11 +1,11 @@
 package com.victors.app
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.KeyEvent
+import android.webkit.ValueCallback
 import android.webkit.WebChromeClient
 import android.webkit.WebSettings
 import android.webkit.WebView
@@ -28,13 +28,15 @@ class MainActivity : AppCompatActivity() {
     private var adView: AdView? = null
     private var appOpenAd: AppOpenAd? = null
 
+    private var filePathCallback: ValueCallback<Array<Uri>>? = null
+    private val fileChooserResultCode = 1001
+
     // Official AdMob Production Unit IDs
     private val appOpenAdUnitId = "ca-app-pub-3286584236618316/8321908684"
     private val bannerAdUnitId = "ca-app-pub-3286584236618316/4354743519"
     private val nativeAdUnitId = "ca-app-pub-3286584236618316/7411976683"
 
-    private val webUrl = "https://victors-plum.vercel.app"
-    private val localFallbackUrl = "file:///android_asset/index.html"
+    private val liveOnlineUrl = "https://victors-plum.vercel.app"
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,13 +44,10 @@ class MainActivity : AppCompatActivity() {
 
         // Initialize Google Mobile Ads SDK
         MobileAds.initialize(this) {
-            // Load App Open Ad on startup
             loadAppOpenAd()
-            // Load Native Ad
             loadNativeAd()
         }
 
-        // Parent container for WebView + Banner Ad
         val rootLayout = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             layoutParams = LinearLayout.LayoutParams(
@@ -57,7 +56,6 @@ class MainActivity : AppCompatActivity() {
             )
         }
 
-        // Main WebView
         webView = WebView(this).apply {
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
@@ -74,23 +72,49 @@ class MainActivity : AppCompatActivity() {
                 supportZoom()
                 builtInZoomControls = true
                 displayZoomControls = false
+                mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
                 cacheMode = WebSettings.LOAD_DEFAULT
             }
 
             webViewClient = object : WebViewClient() {
-                override fun onReceivedError(
-                    view: WebView?,
-                    errorCode: Int,
-                    description: String?,
-                    failingUrl: String?
-                ) {
-                    if (failingUrl != localFallbackUrl) {
-                        view?.loadUrl(localFallbackUrl)
+                override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
+                    if (url != null && (url.startsWith("http://") || url.startsWith("https://"))) {
+                        return false
+                    }
+                    return try {
+                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                        startActivity(intent)
+                        true
+                    } catch (_: Exception) {
+                        false
                     }
                 }
             }
 
-            webChromeClient = WebChromeClient()
+            webChromeClient = object : WebChromeClient() {
+                // Native File Chooser Handler for Image to PDF, Document Editor & File Uploads
+                override fun onShowFileChooser(
+                    webView: WebView?,
+                    filePathCallback: ValueCallback<Array<Uri>>?,
+                    fileChooserParams: FileChooserParams?
+                ): Boolean {
+                    this@MainActivity.filePathCallback?.onReceiveValue(null)
+                    this@MainActivity.filePathCallback = filePathCallback
+
+                    val intent = fileChooserParams?.createIntent() ?: Intent(Intent.ACTION_GET_CONTENT).apply {
+                        addCategory(Intent.CATEGORY_OPENABLE)
+                        type = "*/*"
+                    }
+
+                    return try {
+                        startActivityForResult(intent, fileChooserResultCode)
+                        true
+                    } catch (_: Exception) {
+                        this@MainActivity.filePathCallback = null
+                        false
+                    }
+                }
+            }
         }
 
         rootLayout.addView(webView)
@@ -109,14 +133,20 @@ class MainActivity : AppCompatActivity() {
         setContentView(rootLayout)
 
         // Load Banner Ad
-        val adRequest = AdRequest.Builder().build()
-        adView?.loadAd(adRequest)
+        adView?.loadAd(AdRequest.Builder().build())
 
-        // Load Web Portal
-        if (isNetworkAvailable()) {
-            webView.loadUrl(webUrl)
-        } else {
-            webView.loadUrl(localFallbackUrl)
+        // Direct Online VICTORS Live Platform
+        webView.loadUrl(liveOnlineUrl)
+    }
+
+    @Suppress("DEPRECATION")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == fileChooserResultCode) {
+            if (filePathCallback == null) return
+            val results = WebChromeClient.FileChooserParams.parseResult(resultCode, data)
+            filePathCallback?.onReceiveValue(results)
+            filePathCallback = null
         }
     }
 
@@ -141,28 +171,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun loadNativeAd() {
         val adLoader = AdLoader.Builder(this, nativeAdUnitId)
-            .forNativeAd { nativeAd ->
-                // Native ad loaded successfully
-            }
+            .forNativeAd { _ -> }
             .withAdListener(object : AdListener() {
-                override fun onAdFailedToLoad(adError: LoadAdError) {
-                    // Handle ad failure
-                }
+                override fun onAdFailedToLoad(adError: LoadAdError) {}
             })
             .withNativeAdOptions(NativeAdOptions.Builder().build())
             .build()
 
         adLoader.loadAd(AdRequest.Builder().build())
-    }
-
-    private fun isNetworkAvailable(): Boolean {
-        val connectivityManager =
-            getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val network = connectivityManager.activeNetwork ?: return false
-        val actNw = connectivityManager.getNetworkCapabilities(network) ?: return false
-        return actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
-                actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) ||
-                actNw.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {

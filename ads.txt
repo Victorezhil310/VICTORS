@@ -1,2 +1,1 @@
-# Google AdSense Publisher Verification File for VICTORS
-google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0
+google.com, pub-3286584236618316, DIRECT, f08c47fec0942fa0

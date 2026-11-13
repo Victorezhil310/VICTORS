@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 class MainActivity : AppCompatActivity() {
 
     private lateinit var webView: WebView
-    private val webUrl = "https://victorezhil310.github.io/VICTORS/index.html"
+    private val webUrl = "https://victors-plum.vercel.app"
     private val localFallbackUrl = "file:///android_asset/index.html"
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -44,7 +44,6 @@ class MainActivity : AppCompatActivity() {
                     description: String?,
                     failingUrl: String?
                 ) {
-                    // If online URL fails, switch to offline local assets
                     if (failingUrl != localFallbackUrl) {
                         view?.loadUrl(localFallbackUrl)
                     }

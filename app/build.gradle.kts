@@ -12,11 +12,10 @@ android {
         applicationId = "com.victors.app"
         minSdk = 24
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = 1000
+        versionName = "1.0.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        
         manifestPlaceholders["appName"] = "VICTORS"
     }
 
@@ -56,7 +55,7 @@ dependencies {
     implementation("androidx.webkit:webkit:1.10.0")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 
-    // Firebase BoM and Analytics Integration
+    // Firebase BoM & Analytics Integration
     implementation(platform("com.google.firebase:firebase-bom:33.9.0"))
     implementation("com.google.firebase:firebase-analytics")
 }

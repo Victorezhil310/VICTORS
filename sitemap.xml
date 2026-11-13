@@ -3,32 +3,39 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
                             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-    <!-- Home / Main Tools Store Page -->
+    <!-- Main Vercel Web Portal -->
     <url>
-        <loc>https://victorezhil310.github.io/VICTORS/index.html</loc>
+        <loc>https://victors-plum.vercel.app/</loc>
         <lastmod>2025-01-01</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
-    <!-- Ratings & Community Feedback -->
+    <!-- Privacy Policy Page -->
     <url>
-        <loc>https://victorezhil310.github.io/VICTORS/ratings.html</loc>
+        <loc>https://victors-plum.vercel.app/privacy.html</loc>
+        <lastmod>2025-01-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <!-- Terms of Service Page -->
+    <url>
+        <loc>https://victors-plum.vercel.app/terms.html</loc>
+        <lastmod>2025-01-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <!-- Ratings Page -->
+    <url>
+        <loc>https://victors-plum.vercel.app/ratings.html</loc>
         <lastmod>2025-01-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
-    <!-- Privacy Policy Page for Google Play & Web -->
+    <!-- AdSense Verification File -->
     <url>
-        <loc>https://victorezhil310.github.io/VICTORS/privacy.html</loc>
+        <loc>https://victors-plum.vercel.app/ads.txt</loc>
         <lastmod>2025-01-01</lastmod>
         <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <!-- Terms of Service Page -->
-    <url>
-        <loc>https://victorezhil310.github.io/VICTORS/terms.html</loc>
-        <lastmod>2025-01-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
+        <priority>0.5</priority>
     </url>
 </urlset>

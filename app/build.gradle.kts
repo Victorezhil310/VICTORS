@@ -19,8 +19,18 @@ android {
         manifestPlaceholders["appName"] = "VICTORS"
     }
 
+    signingConfigs {
+        create("release") {
+            storeFile = file("../release.keystore")
+            storePassword = "victorspassword123"
+            keyAlias = "victors-key"
+            keyPassword = "victorspassword123"
+        }
+    }
+
     buildTypes {
         release {
+            signingConfig = signingConfigs.getByName("release")
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(

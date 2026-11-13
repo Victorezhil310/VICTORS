@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VICTORS - Google Play Store Asset Generator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 2rem;
+            margin: 0;
+        }
+        h1 { color: #4f46e5; text-align: center; }
+        p.subtitle { text-align: center; color: #94a3b8; margin-bottom: 2rem; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .asset-card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }
+        .asset-card h3 { margin: 0 0 0.5rem 0; color: #06b6d4; }
+        .asset-card p { font-size: 0.85rem; color: #94a3b8; margin-bottom: 1rem; }
+        canvas {
+            border: 2px dashed #4f46e5;
+            border-radius: 12px;
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 1rem;
+            background: #0f172a;
+        }
+        .btn-download {
+            background: linear-gradient(135deg, #4f46e5, #06b6d4);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+        .btn-download:hover { transform: scale(1.05); }
+    </style>
+</head>
+<body>
+
+    <h1>🚀 VICTORS Google Play Store Assets Generator</h1>
+    <p class="subtitle">Click "Download PNG" on any asset below to save exact 100% pixel-perfect images for Google Play Console.</p>
+
+    <div class="grid">
+        <!-- 1. App Logo (512 x 512) -->
+        <div class="asset-card">
+            <h3>1. App Logo</h3>
+            <p>Dimensions: <strong>512 × 512 px</strong> (Required by Play Store)</p>
+            <canvas id="cvLogo" width="512" height="512"></canvas>
+            <button class="btn-download" onclick="downloadCanvas('cvLogo', 'victors_app_logo_512x512.png')">Download PNG (512x512)</button>
+        </div>
+
+        <!-- 2. Feature Graphic (1024 x 500) -->
+        <div class="asset-card">
+            <h3>2. Feature Graphic Banner</h3>
+            <p>Dimensions: <strong>1024 × 500 px</strong> (Required by Play Store)</p>
+            <canvas id="cvFeature" width="1024" height="500"></canvas>
+            <button class="btn-download" onclick="downloadCanvas('cvFeature', 'victors_feature_graphic_1024x500.png')">Download PNG (1024x500)</button>
+        </div>
+
+        <!-- 3. Screenshot 1: Main Hub (1080 x 1920) -->
+        <div class="asset-card">
+            <h3>3. Screenshot 1 - Main Hub</h3>
+            <p>Dimensions: <strong>1080 × 1920 px</strong> (Phone Screenshot)</p>
+            <canvas id="cvSs1" width="1080" height="1920"></canvas>
+            <button class="btn-download" onclick="downloadCanvas('cvSs1', 'screenshot_1_main_hub_1080x1920.png')">Download PNG (1080x1920)</button>
+        </div>
+
+        <!-- 4. Screenshot 2: PDF Studio (1080 x 1920) -->
+        <div class="asset-card">
+            <h3>4. Screenshot 2 - PDF Studio</h3>
+            <p>Dimensions: <strong>1080 × 1920 px</strong> (Phone Screenshot)</p>
+            <canvas id="cvSs2" width="1080" height="1920"></canvas>
+            <button class="btn-download" onclick="downloadCanvas('cvSs2', 'screenshot_2_pdf_studio_1080x1920.png')">Download PNG (1080x1920)</button>
+        </div>
+
+        <!-- 5. Screenshot 3: Student GPA (1080 x 1920) -->
+        <div class="asset-card">
+            <h3>5. Screenshot 3 - Student GPA</h3>
+            <p>Dimensions: <strong>1080 × 1920 px</strong> (Phone Screenshot)</p>
+            <canvas id="cvSs3" width="1080" height="1920"></canvas>
+            <button class="btn-download" onclick="downloadCanvas('cvSs3', 'screenshot_3_student_gpa_1080x1920.png')">Download PNG (1080x1920)</button>
+        </div>
+
+        <!-- 6. Screenshot 4: Kids Corner (1080 x 1920) -->
+        <div class="asset-card">
+            <h3>6. Screenshot 4 - Kids Corner</h3>
+            <p>Dimensions: <strong>1080 × 1920 px</strong> (Phone Screenshot)</p>
+            <canvas id="cvSs4" width="1080" height="1920"></canvas>
+            <button class="btn-download" onclick="downloadCanvas('cvSs4', 'screenshot_4_kids_corner_1080x1920.png')">Download PNG (1080x1920)</button>
+        </div>
+    </div>
+
+    <script>
+        // Canvas Rendering Helper
+        function drawGradient(ctx, w, h) {
+            const grad = ctx.createLinearGradient(0, 0, w, h);
+            grad.addColorStop(0, '#0f172a');
+            grad.addColorStop(0.5, '#1e1b4b');
+            grad.addColorStop(1, '#0f172a');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, w, h);
+        }
+
+        // 1. Logo (512x512)
+        const c1 = document.getElementById('cvLogo');
+        const x1 = c1.getContext('2d');
+        drawGradient(x1, 512, 512);
+
+        // Rocket Glow Circle
+        x1.beginPath();
+        x1.arc(256, 230, 140, 0, Math.PI * 2);
+        x1.fillStyle = 'rgba(79, 70, 229, 0.25)';
+        x1.fill();
+
+        // Rocket Body
+        x1.fillStyle = '#06b6d4';
+        x1.beginPath();
+        x1.moveTo(256, 120);
+        x1.quadraticCurveTo(310, 180, 310, 260);
+        x1.lineTo(202, 260);
+        x1.quadraticCurveTo(202, 180, 256, 120);
+        x1.fill();
+
+        // Wings & Fins
+        x1.fillStyle = '#4f46e5';
+        x1.beginPath();
+        x1.moveTo(202, 230); x1.lineTo(160, 290); x1.lineTo(202, 280); x1.fill();
+        x1.beginPath();
+        x1.moveTo(310, 230); x1.lineTo(352, 290); x1.lineTo(310, 280); x1.fill();
+
+        // Text
+        x1.fillStyle = '#ffffff';
+        x1.font = '900 64px sans-serif';
+        x1.textAlign = 'center';
+        x1.fillText('VICTORS', 256, 380);
+
+        x1.fillStyle = '#06b6d4';
+        x1.font = '700 24px sans-serif';
+        x1.fillText('PRO SUITE', 256, 420);
+
+        // 2. Feature Graphic (1024x500)
+        const c2 = document.getElementById('cvFeature');
+        const x2 = c2.getContext('2d');
+        drawGradient(x2, 1024, 500);
+
+        // Decorative background shapes
+        x2.fillStyle = 'rgba(79, 70, 229, 0.15)';
+        x2.beginPath(); x2.arc(150, 100, 200, 0, Math.PI*2); x2.fill();
+        x2.fillStyle = 'rgba(6, 182, 212, 0.15)';
+        x2.beginPath(); x2.arc(900, 400, 250, 0, Math.PI*2); x2.fill();
+
+        x2.fillStyle = '#ffffff';
+        x2.font = '900 72px sans-serif';
+        x2.textAlign = 'center';
+        x2.fillText('VICTORS', 512, 220);
+
+        x2.fillStyle = '#06b6d4';
+        x2.font = '700 32px sans-serif';
+        x2.fillText('Universal Multi-Utility, Kids, Education & PDF Suite', 512, 280);
+
+        x2.fillStyle = '#94a3b8';
+        x2.font = '600 24px sans-serif';
+        x2.fillText('📱 Phone  |  💻 Tablet  |  🖥️ Desktop  |  🥽 Android XR', 512, 350);
+
+        // Screenshot Generator Helper
+        function drawScreenshot(canvasId, title, category, badgeColor, description, toolDetails) {
+            const cv = document.getElementById(canvasId);
+            const ctx = cv.getContext('2d');
+            drawGradient(ctx, 1080, 1920);
+
+            // Phone Frame Outer
+            ctx.fillStyle = '#1e293b';
+            ctx.strokeStyle = '#334155';
+            ctx.lineWidth = 8;
+            ctx.beginPath();
+            ctx.roundRect(80, 160, 920, 1660, 40);
+            ctx.fill();
+            ctx.stroke();
+
+            // Screen Top Header
+            ctx.fillStyle = '#4f46e5';
+            ctx.beginPath();
+            ctx.roundRect(110, 190, 860, 200, 24);
+            ctx.fill();
+
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '900 52px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('VICTORS STORE', 540, 280);
+
+            ctx.font = '600 28px sans-serif';
+            ctx.fillStyle = '#e0e7ff';
+            ctx.fillText('All-In-One Universal Suite', 540, 330);
+
+            // Main Featured Card
+            ctx.fillStyle = '#0f172a';
+            ctx.beginPath();
+            ctx.roundRect(120, 430, 840, 600, 30);
+            ctx.fill();
+
+            // Badge Tag
+            ctx.fillStyle = badgeColor;
+            ctx.beginPath();
+            ctx.roundRect(160, 470, 260, 60, 30);
+            ctx.fill();
+
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '800 24px sans-serif';
+            ctx.fillText(category, 290, 510);
+
+            // Card Title
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '900 56px sans-serif';
+            ctx.textAlign = 'left';
+            ctx.fillText(title, 160, 610);
+
+            // Description
+            ctx.fillStyle = '#94a3b8';
+            ctx.font = '500 32px sans-serif';
+            ctx.fillText(description[0], 160, 680);
+            ctx.fillText(description[1], 160, 730);
+
+            // Interactive Tool Preview Box
+            ctx.fillStyle = '#1e293b';
+            ctx.beginPath();
+            ctx.roundRect(160, 780, 760, 210, 20);
+            ctx.fill();
+
+            ctx.fillStyle = '#06b6d4';
+            ctx.font = '700 32px sans-serif';
+            ctx.fillText(toolDetails[0], 190, 850);
+            ctx.fillStyle = '#f8fafc';
+            ctx.font = '600 28px sans-serif';
+            ctx.fillText(toolDetails[1], 190, 910);
+            ctx.fillText(toolDetails[2], 190, 955);
+
+            // Lower Section Grid Cards
+            for (let i = 0; i < 2; i++) {
+                ctx.fillStyle = '#0f172a';
+                ctx.beginPath();
+                ctx.roundRect(120, 1070 + (i * 350), 840, 310, 24);
+                ctx.fill();
+
+                ctx.fillStyle = i === 0 ? '#10b981' : '#f59e0b';
+                ctx.beginPath();
+                ctx.arc(190, 1140 + (i * 350), 40, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.fillStyle = '#ffffff';
+                ctx.font = '800 40px sans-serif';
+                ctx.fillText(i === 0 ? 'Instant Offline Fallback' : 'Google Play Safety & Privacy', 260, 1150 + (i * 350));
+
+                ctx.fillStyle = '#94a3b8';
+                ctx.font = '500 28px sans-serif';
+                ctx.fillText(i === 0 ? 'Works 100% offline without internet.' : 'No data tracked. 100% kid safe & private.', 260, 1200 + (i * 350));
+                ctx.fillText(i === 0 ? 'Runs smoothly on any screen resolution.' : 'Full /privacy, /terms and /ratings included.', 260, 1240 + (i * 350));
+            }
+        }
+
+        // Draw 4 Screenshots
+        drawScreenshot('cvSs1', 'VICTORS Multi-Utility', 'FEATURED HUB', '#4f46e5',
+            ['Explore free PDF tools, Kids learning games,', 'and Student grade calculators in one store.'],
+            ['★ 4.9 Rating (2,500+ Reviews)', '⚡ 50+ Built-in Tools & Utilities', '🚀 Works across Mobile, Tablet, PC & XR']);
+
+        drawScreenshot('cvSs2', 'PDF Studio Pro', 'PDF UTILITY', '#ef4444',
+            ['Convert, extract text, split & analyze PDF', 'documents securely in your device browser.'],
+            ['📄 In-Browser Text Extractor & Reader', '✔ Local Privacy: Files never leave device', '📊 Word Count & Summary Generator']);
+
+        drawScreenshot('cvSs3', 'EduCalc & GPA Suite', 'STUDENT TOOLS', '#4f46e5',
+            ['Calculate semester GPA, score percentages,', 'and track subject assignments accurately.'],
+            ['🎓 GPA & Marks Percentage Calculator', '✔ Automated Grade Mapping (A+, A, B, C)', '📈 Subject Report & Analytics Dashboard']);
+
+        drawScreenshot('cvSs4', 'Kids Math Explorer', 'KIDS CORNER', '#10b981',
+            ['Gamified math challenges and spelling puzzles', 'designed for children of all ages.'],
+            ['👶 100% Kid Safe & Ad-Free Interface', '✔ Addition, Subtraction & Math Puzzles', '🏆 Score Counters & Achievement Badges']);
+
+        // Download Helper Function
+        function downloadCanvas(canvasId, fileName) {
+            const canvas = document.getElementById(canvasId);
+            const link = document.createElement('a');
+            link.download = fileName;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+    </script>
+</body>
+</html>

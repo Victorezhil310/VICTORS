@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -16,7 +17,6 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         
-        // Multi-device and spatial configuration
         manifestPlaceholders["appName"] = "VICTORS"
     }
 
@@ -55,4 +55,8 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.webkit:webkit:1.10.0")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+
+    // Firebase BoM and Analytics Integration
+    implementation(platform("com.google.firebase:firebase-bom:33.9.0"))
+    implementation("com.google.firebase:firebase-analytics")
 }

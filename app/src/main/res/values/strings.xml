@@ -3,4 +3,6 @@
     <string name="app_desc">Universal Educational, PDF &amp; Utility Suite for Phones, Tablets, Desktop and XR</string>
     <!-- Google OAuth 2.0 Web Client ID -->
     <string name="default_web_client_id">426544571995-ravjno58ltdv2h9ohjhr7huprqdolv2h.apps.googleusercontent.com</string>
+    <!-- FCM VAPID Web Push Key -->
+    <string name="fcm_vapid_key">BD3qWT9Fg--I3401GI2mm8zwWwHdr76Boxc_ohlSRHR5vTUhpmLJH9LtAeMuXxbDb02JOKWiXdaetd9-1K8Yn68</string>
 </resources>

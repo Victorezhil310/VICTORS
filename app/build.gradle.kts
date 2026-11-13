@@ -65,9 +65,10 @@ dependencies {
     implementation("androidx.webkit:webkit:1.10.0")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 
-    // Firebase BoM & Analytics Integration
+    // Firebase BoM, Analytics & Cloud Messaging Integration
     implementation(platform("com.google.firebase:firebase-bom:33.9.0"))
     implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-messaging")
 
     // Google Mobile Ads (AdMob) SDK
     implementation("com.google.android.gms:play-services-ads:23.6.0")

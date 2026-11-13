@@ -1,58 +1,58 @@
 const appsData = [
     {
-        id: "ai-assistant-tool",
-        title: "VICTORS AI Smart Assistant",
-        category: "ai",
-        icon: "fa-solid fa-robot",
-        iconBg: "#4f46e5",
-        rating: "4.9",
-        reviews: "3.4k",
-        desc: "AI study companion for instant answers, text summarization, auto-quiz generation, and smart productivity tips.",
-        features: ["Instant AI Answers", "Text Auto-Summarizer", "Quiz Generator", "Study Coach Mode"]
-    },
-    {
-        id: "pdf-pro",
-        title: "VICTORS PDF Studio",
+        id: "img-to-pdf-tool",
+        title: "Image to PDF Converter",
         category: "pdf",
-        icon: "fa-solid fa-file-pdf",
+        icon: "fa-solid fa-file-image",
         iconBg: "#ef4444",
         rating: "4.9",
-        reviews: "2.1k",
-        desc: "Convert, extract text, split, and view PDF documents securely inside your browser or mobile device.",
-        features: ["Text Extractor", "PDF Reader", "Word Count & Summarizer"]
+        reviews: "4.8k",
+        desc: "Convert PNG, JPG, WEBP photos to PDF documents instantly.",
+        features: ["Batch Image Upload", "Reorder Images", "Instant Download PDF"]
     },
     {
-        id: "student-calc",
-        title: "EduCalc & GPA Suite",
+        id: "pdf-text-editor",
+        title: "PDF & Text Online Editor",
+        category: "pdf",
+        icon: "fa-solid fa-pen-to-square",
+        iconBg: "#f59e0b",
+        rating: "4.8",
+        reviews: "3.2k",
+        desc: "Edit document text online, convert letter case, remove duplicate lines.",
+        features: ["WYSIWYG Editor", "Remove Unwanted Lines"]
+    },
+    {
+        id: "student-gpa-calc",
+        title: "Student GPA & Grade Suite",
         category: "students",
         icon: "fa-solid fa-graduation-cap",
-        iconBg: "#06b6d4",
-        rating: "4.8",
-        reviews: "1.8k",
-        desc: "Calculate semester GPA, percentage marks, letter grades, and track assignment scores.",
-        features: ["GPA & Marks Calculator", "Grade Letter Mapping"]
+        iconBg: "#4f46e5",
+        rating: "4.9",
+        reviews: "5.1k",
+        desc: "Calculate semester GPA, score percentages, and letter grades.",
+        features: ["GPA 5.0 Conversion", "Letter Grade Mapping"]
     },
     {
-        id: "kids-math",
+        id: "kids-math-game",
         title: "Kids Math Explorer",
         category: "kids",
         icon: "fa-solid fa-child",
         iconBg: "#10b981",
         rating: "4.9",
-        reviews: "2.8k",
-        desc: "Interactive gamified math challenges for children to learn addition, subtraction, and logical puzzles.",
-        features: ["Visual Math Puzzles", "Score System"]
+        reviews: "6.2k",
+        desc: "Interactive gamified addition, subtraction, and multiplication puzzles.",
+        features: ["Visual Trophies", "Kid-Safe Interface"]
     },
     {
-        id: "qr-utility",
-        title: "Mobile QR & Barcode Hub",
+        id: "mobile-qr-hub",
+        title: "Mobile QR Code Generator",
         category: "mobile",
         icon: "fa-solid fa-qrcode",
-        iconBg: "#f59e0b",
-        rating: "4.7",
-        reviews: "1.2k",
-        desc: "Generate instant QR codes for Wi-Fi, URLs, contacts, and scan codes using camera.",
-        features: ["Custom QR Colors", "Instant Download PNG"]
+        iconBg: "#06b6d4",
+        rating: "4.9",
+        reviews: "4.1k",
+        desc: "Generate QR codes for Wi-Fi passwords, URLs, and phone numbers.",
+        features: ["Wi-Fi QR Maker", "Instant Download"]
     }
 ];
 
@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <i class="fa-solid fa-star"></i>
                         <span>${app.rating}</span>
                     </div>
-                    <button class="btn btn-primary btn-sm" onclick="alert('Module Enabled')">
+                    <button class="btn btn-primary btn-sm" onclick="alert('Module Active')">
                         Launch
                     </button>
                 </div>

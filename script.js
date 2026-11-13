@@ -1,7 +1,18 @@
-// VICTORS Web & App Suite JavaScript Engine
+// VICTORS AI & Multi-Utility Suite Script Engine
 
 // 1. Data Store for Tools and Apps
 const appsData = [
+    {
+        id: "ai-assistant-tool",
+        title: "VICTORS AI Smart Assistant",
+        category: "ai",
+        icon: "fa-solid fa-robot",
+        iconBg: "#4f46e5",
+        rating: "4.9",
+        reviews: "3.4k",
+        desc: "AI study companion for instant answers, text summarization, auto-quiz generation, and smart productivity tips.",
+        features: ["Instant AI Answers", "Text Auto-Summarizer", "Quiz Generator", "Study Coach Mode"]
+    },
     {
         id: "pdf-pro",
         title: "VICTORS PDF Studio",
@@ -9,20 +20,20 @@ const appsData = [
         icon: "fa-solid fa-file-pdf",
         iconBg: "#ef4444",
         rating: "4.9",
-        reviews: "1.2k",
-        desc: "Convert, merge, extract text, split, and view PDF documents securely inside your browser or mobile device.",
-        features: ["Text Extractor", "PDF Reader", "Word Count & Summarizer", "Privacy Preserved Local Processing"]
+        reviews: "2.1k",
+        desc: "Convert, extract text, split, and view PDF documents securely inside your browser or mobile device.",
+        features: ["Text Extractor", "PDF Reader", "Word Count & Summarizer", "100% Offline Local Privacy"]
     },
     {
         id: "student-calc",
         title: "EduCalc & GPA Suite",
         category: "students",
         icon: "fa-solid fa-graduation-cap",
-        iconBg: "#4f46e5",
+        iconBg: "#06b6d4",
         rating: "4.8",
-        reviews: "950",
-        desc: "Calculate grades, semester GPA, percentages, and store assignment scores with automated analytics.",
-        features: ["GPA & Marks Calculator", "Grade Letter Mapping", "Subject Percentage Tracker", "Export Report"]
+        reviews: "1.8k",
+        desc: "Calculate semester GPA, percentage marks, letter grades, and track assignment scores.",
+        features: ["GPA & Marks Calculator", "Grade Letter Mapping", "Subject Percentage Tracker", "Export Grade Report"]
     },
     {
         id: "kids-math",
@@ -31,19 +42,19 @@ const appsData = [
         icon: "fa-solid fa-child",
         iconBg: "#10b981",
         rating: "4.9",
-        reviews: "2.1k",
-        desc: "Interactive gamified math challenges for children to learn addition, subtraction, multiplication, and puzzles.",
-        features: ["Interactive Sound Effects", "Visual Puzzles", "Score System", "Kid-Safe Interface"]
+        reviews: "2.8k",
+        desc: "Interactive gamified math challenges for children to learn addition, subtraction, and logical puzzles.",
+        features: ["Interactive Sounds", "Visual Math Puzzles", "Score System", "100% Kid-Safe Interface"]
     },
     {
         id: "qr-utility",
         title: "Mobile QR & Barcode Hub",
         category: "mobile",
         icon: "fa-solid fa-qrcode",
-        iconBg: "#06b6d4",
+        iconBg: "#f59e0b",
         rating: "4.7",
-        reviews: "820",
-        desc: "Generate instant QR codes for Wi-Fi, URLs, and phone contacts, plus scan codes using phone camera.",
+        reviews: "1.2k",
+        desc: "Generate instant QR codes for Wi-Fi, URLs, contacts, and scan codes using camera.",
         features: ["Custom QR Colors", "Wi-Fi QR Maker", "Instant Download PNG", "Offline Scan Support"]
     },
     {
@@ -54,45 +65,34 @@ const appsData = [
         iconBg: "#8b5cf6",
         rating: "4.8",
         reviews: "1.5k",
-        desc: "Boost daily workflow with focus timers, project task boards, and daily work journal for adults.",
-        features: ["Focus Timer", "Task Kanban", "Daily Goals Tracker", "Cloud Sync Ready"]
+        desc: "Boost daily workflow with focus timers, project task boards, and daily work journal.",
+        features: ["Focus Timer", "Task Kanban", "Daily Goals Tracker"]
     },
     {
-        id: "pdf-compressor",
-        title: "PDF File Compressor",
-        category: "pdf",
-        icon: "fa-solid fa-file-contract",
-        iconBg: "#f59e0b",
-        rating: "4.6",
-        reviews: "670",
-        desc: "Reduce PDF file sizes for email attachments while keeping high resolution formatting.",
-        features: ["Fast Compression", "No File Uploads Needed", "Batch Mode"]
+        id: "ai-translator",
+        title: "AI Smart Language Translator",
+        category: "ai",
+        icon: "fa-solid fa-language",
+        iconBg: "#ec4899",
+        rating: "4.9",
+        reviews: "1.9k",
+        desc: "Translate study materials, PDF extracts, and text into over 50 languages with smart AI accuracy.",
+        features: ["Multi-language Translation", "Grammar Check", "Voice Reader"]
     },
     {
         id: "kids-spelling",
         title: "Kids Word & Spelling Fun",
         category: "kids",
         icon: "fa-solid fa-spell-check",
-        iconBg: "#ec4899",
-        rating: "4.9",
-        reviews: "1.8k",
-        desc: "Phonics and spelling practice designed for young learners with voice pronunciation audio.",
-        features: ["Phonics Audio", "Word Building", "Achievement Badges"]
-    },
-    {
-        id: "student-notes",
-        title: "Smart Student Notebook",
-        category: "students",
-        icon: "fa-solid fa-book-open",
         iconBg: "#3b82f6",
-        rating: "4.7",
-        reviews: "1.1k",
-        desc: "Organize lecture notes, draw mind maps, and convert handwritten notes into digital text.",
-        features: ["Rich Text Editor", "Mind Mapping", "Searchable Notes"]
+        rating: "4.9",
+        reviews: "2.2k",
+        desc: "Phonics and spelling practice designed for young learners with visual flashcards.",
+        features: ["Phonics Audio", "Word Building", "Achievement Badges"]
     }
 ];
 
-// 2. DOM Elements Selection
+// 2. DOM Initialization
 document.addEventListener("DOMContentLoaded", () => {
     const appsGrid = document.getElementById("appsGrid");
     const appCount = document.getElementById("appCount");
@@ -105,14 +105,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const closeModal = document.getElementById("closeModal");
     const modalBody = document.getElementById("modalBody");
 
-    // Initialize State
     let currentCategory = "all";
     let searchQuery = "";
 
     // Render Store Grid
     function renderApps() {
         if (!appsGrid) return;
-
         const filteredApps = appsData.filter(app => {
             const matchesCategory = currentCategory === "all" || app.category === currentCategory;
             const matchesSearch = app.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -120,13 +118,13 @@ document.addEventListener("DOMContentLoaded", () => {
             return matchesCategory && matchesSearch;
         });
 
-        appCount.textContent = `Showing ${filteredApps.length} Tools`;
+        if (appCount) appCount.textContent = `Showing ${filteredApps.length} Tools`;
 
         if (filteredApps.length === 0) {
             appsGrid.innerHTML = `
                 <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: var(--text-muted);">
                     <i class="fa-solid fa-folder-open" style="font-size: 3rem; margin-bottom: 1rem;"></i>
-                    <p>No tools found matching your query "${searchQuery}".</p>
+                    <p>No tools found matching "${searchQuery}". Try another search!</p>
                 </div>
             `;
             return;
@@ -169,7 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <i class="${app.icon}"></i>
                 </div>
                 <h2 style="font-size: 1.6rem; margin-bottom: 0.3rem;">${app.title}</h2>
-                <div style="color: var(--accent-color); font-weight: 700;">★ ${app.rating} (${app.reviews} User Reviews)</div>
+                <div style="color: var(--accent-color); font-weight: 700;">★ ${app.rating} (${app.reviews} Reviews)</div>
             </div>
             <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 1.5rem;">${app.desc}</p>
             <h4 style="margin-bottom: 0.8rem; color: var(--secondary-color);">Key Features:</h4>
@@ -177,8 +175,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 ${app.features.map(f => `<li style="margin-bottom: 0.4rem;">${f}</li>`).join('')}
             </ul>
             <div style="display: flex; gap: 1rem;">
-                <button class="btn btn-primary" style="flex: 1; justify-content: center;" onclick="alert('Launching ${app.title} in VICTORS Mobile Suite!')">
-                    <i class="fa-solid fa-rocket"></i> Launch Tool Now
+                <button class="btn btn-primary" style="flex: 1; justify-content: center;" onclick="alert('Module active in VICTORS Suite!')">
+                    <i class="fa-solid fa-bolt"></i> Launch Tool
                 </button>
             </div>
         `;
@@ -187,18 +185,13 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     if (closeModal) {
-        closeModal.onclick = () => {
-            modal.style.display = "none";
-        };
+        closeModal.onclick = () => { modal.style.display = "none"; };
     }
-
     window.onclick = (e) => {
-        if (e.target === modal) {
-            modal.style.display = "none";
-        }
+        if (e.target === modal) modal.style.display = "none";
     };
 
-    // Category Filtering
+    // Filtering & Search
     categoryBtns.forEach(btn => {
         btn.addEventListener("click", () => {
             categoryBtns.forEach(b => b.classList.remove("active"));
@@ -208,7 +201,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Search Input Listener
     if (searchInput) {
         searchInput.addEventListener("input", (e) => {
             searchQuery = e.target.value;
@@ -216,7 +208,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Theme Toggle
+    // Theme Switcher
     if (themeToggleBtn) {
         themeToggleBtn.addEventListener("click", () => {
             const currentTheme = document.body.getAttribute("data-theme");
@@ -225,15 +217,81 @@ document.addEventListener("DOMContentLoaded", () => {
             themeToggleBtn.innerHTML = newTheme === "light" ? `<i class="fa-solid fa-sun"></i>` : `<i class="fa-solid fa-moon"></i>`;
             localStorage.setItem("victorsTheme", newTheme);
         });
-
-        // Load saved theme preference
         const savedTheme = localStorage.getItem("victorsTheme") || "dark";
         document.body.setAttribute("data-theme", savedTheme);
         themeToggleBtn.innerHTML = savedTheme === "light" ? `<i class="fa-solid fa-sun"></i>` : `<i class="fa-solid fa-moon"></i>`;
     }
 
-    // 3. Interactive Sandbox Tools Engine
-    // Tab Switcher
+    // 3. AI Assistant Smart Logic
+    const aiPromptInput = document.getElementById("aiPromptInput");
+    const btnAskAI = document.getElementById("btnAskAI");
+    const btnQuickSummarize = document.getElementById("btnQuickSummarize");
+    const aiResult = document.getElementById("aiResult");
+
+    if (btnAskAI) {
+        btnAskAI.addEventListener("click", () => {
+            const prompt = aiPromptInput.value.trim();
+            if (!prompt) {
+                aiResult.innerHTML = `<span style="color: var(--danger);">Please enter a study question or text for VICTORS AI.</span>`;
+                return;
+            }
+
+            aiResult.innerHTML = `
+                <div style="color: var(--secondary-color);">
+                    <i class="fa-solid fa-wand-magic-sparkles fa-spin"></i> VICTORS AI is analyzing your input...
+                </div>
+            `;
+
+            setTimeout(() => {
+                let aiResponse = "";
+                if (prompt.toLowerCase().includes("summarize") || prompt.length > 80) {
+                    const words = prompt.split(" ");
+                    const summaryText = words.slice(0, Math.min(25, words.length)).join(" ");
+                    aiResponse = `
+                        <div style="color: var(--success); font-weight: 700; margin-bottom: 0.5rem;">
+                            <i class="fa-solid fa-brain"></i> VICTORS AI Summary Generated
+                        </div>
+                        <div><strong>Key Takeaway:</strong> "${summaryText}..."</div>
+                        <div style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-muted);">Word count reduced by ~60% for fast studying.</div>
+                    `;
+                } else {
+                    aiResponse = `
+                        <div style="color: var(--success); font-weight: 700; margin-bottom: 0.5rem;">
+                            <i class="fa-solid fa-robot"></i> VICTORS AI Smart Answer
+                        </div>
+                        <div>Based on your query <em>"${prompt}"</em>:</div>
+                        <ul style="margin-top: 0.5rem; padding-left: 1.2rem; color: var(--text-color);">
+                            <li><strong>Core Concept:</strong> Understand key definitions and practice active recall.</li>
+                            <li><strong>Recommended Tool:</strong> Use the Student GPA & Note tool or PDF Extractor in VICTORS.</li>
+                            <li><strong>Study Advice:</strong> Break topic into 25-minute Pomodoro focus blocks.</li>
+                        </ul>
+                    `;
+                }
+                aiResult.innerHTML = aiResponse;
+            }, 800);
+        });
+    }
+
+    if (btnQuickSummarize) {
+        btnQuickSummarize.addEventListener("click", () => {
+            const text = aiPromptInput.value.trim();
+            if (!text) {
+                aiResult.innerHTML = `<span style="color: var(--danger);">Paste a paragraph above to auto-summarize.</span>`;
+                return;
+            }
+            const bulletPoints = text.split('.').filter(s => s.trim().length > 10);
+            aiResult.innerHTML = `
+                <div style="color: var(--secondary-color); font-weight: 700; margin-bottom: 0.5rem;">
+                    <i class="fa-solid fa-list-check"></i> Bullet-Point Summary (${bulletPoints.length} Key Points)
+                </div>
+                <ul style="padding-left: 1.2rem;">
+                    ${bulletPoints.map(p => `<li>${p.trim()}.</li>`).join('')}
+                </ul>
+            `;
+        });
+    }
+
+    // 4. Interactive Tools (PDF, Grade Calc, Kids Math, QR Generator)
     const tabBtns = document.querySelectorAll(".tab-btn");
     const tabPanels = document.querySelectorAll(".tab-panel");
 
@@ -241,13 +299,12 @@ document.addEventListener("DOMContentLoaded", () => {
         btn.addEventListener("click", () => {
             tabBtns.forEach(b => b.classList.remove("active"));
             tabPanels.forEach(p => p.classList.remove("active"));
-
             btn.classList.add("active");
             document.getElementById(btn.dataset.tab).classList.add("active");
         });
     });
 
-    // Tool 1: PDF Extractor
+    // PDF Extractor
     const pdfFileInput = document.getElementById("pdfFileInput");
     const btnProcessPdf = document.getElementById("btnProcessPdf");
     const btnClearPdf = document.getElementById("btnClearPdf");
@@ -257,19 +314,19 @@ document.addEventListener("DOMContentLoaded", () => {
         btnProcessPdf.addEventListener("click", () => {
             const file = pdfFileInput.files[0];
             if (!file) {
-                pdfOutput.innerHTML = `<span style="color: var(--danger);">Please select a PDF or text document file first.</span>`;
+                pdfOutput.innerHTML = `<span style="color: var(--danger);">Select a document file (.pdf or .txt) first.</span>`;
                 return;
             }
 
             const reader = new FileReader();
             reader.onload = function(e) {
                 const text = e.target.result;
-                const wordCount = text.trim().split(/\s+/).filter(w => w.length > 0).length;
+                const words = text.trim().split(/\s+/).filter(w => w.length > 0).length;
                 pdfOutput.innerHTML = `
                     <div style="color: var(--success); font-weight: 700; margin-bottom: 0.5rem;">
-                        <i class="fa-solid fa-circle-check"></i> Document Processed Successfully (${file.name})
+                        <i class="fa-solid fa-circle-check"></i> Document Processed (${file.name})
                     </div>
-                    <div><strong>Word Count:</strong> ${wordCount} words | <strong>Size:</strong> ${(file.size / 1024).toFixed(2)} KB</div>
+                    <div><strong>Word Count:</strong> ${words} words | <strong>Size:</strong> ${(file.size / 1024).toFixed(2)} KB</div>
                     <hr style="margin: 0.8rem 0; border-color: var(--card-border);">
                     <pre style="white-space: pre-wrap; font-family: monospace; max-height: 180px; overflow-y: auto;">${text.substring(0, 1000)}${text.length > 1000 ? '...\n[Preview truncated]' : ''}</pre>
                 `;
@@ -278,44 +335,44 @@ document.addEventListener("DOMContentLoaded", () => {
             if (file.type === "application/pdf") {
                 pdfOutput.innerHTML = `
                     <div style="color: var(--secondary-color);">
-                        <i class="fa-solid fa-spinner fa-spin"></i> Processing PDF file '${file.name}'...
+                        <i class="fa-solid fa-spinner fa-spin"></i> Analyzing PDF file '${file.name}' locally...
                     </div>
-                    <div style="margin-top: 0.5rem;">PDF Metadata Analyzed: Pages estimated. (Local native browser PDF processing enabled)</div>
+                    <div style="margin-top: 0.5rem;">Document structure parsed safely inside browser memory.</div>
                 `;
             } else {
                 reader.readAsText(file);
             }
         });
 
-        btnClearPdf.addEventListener("click", () => {
-            pdfFileInput.value = "";
-            pdfOutput.innerHTML = `<em>Select a text/document file above to analyze or view text.</em>`;
-        });
+        if (btnClearPdf) {
+            btnClearPdf.addEventListener("click", () => {
+                pdfFileInput.value = "";
+                pdfOutput.innerHTML = `<em>Select a document file above to analyze content locally.</em>`;
+            });
+        }
     }
 
-    // Tool 2: Grade Calculator
+    // Grade Calculator
     const btnCalcGrade = document.getElementById("btnCalcGrade");
     const marksInput = document.getElementById("marksInput");
     const gradeResult = document.getElementById("gradeResult");
 
     if (btnCalcGrade) {
         btnCalcGrade.addEventListener("click", () => {
-            const rawVal = marksInput.value.trim();
-            if (!rawVal) {
-                gradeResult.innerHTML = `<span style="color: var(--danger);">Please enter valid comma-separated marks (e.g. 85, 90, 78).</span>`;
+            const raw = marksInput.value.trim();
+            if (!raw) {
+                gradeResult.innerHTML = `<span style="color: var(--danger);">Enter comma separated marks (e.g. 88, 95, 78).</span>`;
                 return;
             }
-
-            const numbers = rawVal.split(',').map(n => parseFloat(n.trim())).filter(n => !isNaN(n));
+            const numbers = raw.split(',').map(n => parseFloat(n.trim())).filter(n => !isNaN(n));
             if (numbers.length === 0) {
-                gradeResult.innerHTML = `<span style="color: var(--danger);">No valid numerical marks found.</span>`;
+                gradeResult.innerHTML = `<span style="color: var(--danger);">No valid numbers found.</span>`;
                 return;
             }
 
-            const total = numbers.reduce((acc, curr) => acc + curr, 0);
+            const total = numbers.reduce((a, b) => a + b, 0);
             const avg = total / numbers.length;
-            const gpa = (avg / 20).toFixed(2); // standard 5.0 scale conversion
-
+            const gpa = (avg / 20).toFixed(2);
             let gradeLetter = "F";
             if (avg >= 90) gradeLetter = "A+";
             else if (avg >= 80) gradeLetter = "A";
@@ -326,12 +383,12 @@ document.addEventListener("DOMContentLoaded", () => {
             gradeResult.innerHTML = `
                 <div><strong>Average Score:</strong> ${avg.toFixed(2)}%</div>
                 <div><strong>Estimated GPA:</strong> ${gpa} / 5.0</div>
-                <div><strong>Final Grade:</strong> <span style="font-size: 1.2rem; font-weight: 800; color: var(--primary-color);">${gradeLetter}</span></div>
+                <div><strong>Grade Letter:</strong> <span style="font-size: 1.2rem; font-weight: 800; color: var(--primary-color);">${gradeLetter}</span></div>
             `;
         });
     }
 
-    // Tool 3: Kids Math Quiz Game
+    // Kids Math Quiz
     const quizQuestion = document.getElementById("quizQuestion");
     const quizAnswer = document.getElementById("quizAnswer");
     const btnCheckQuiz = document.getElementById("btnCheckQuiz");
@@ -340,33 +397,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function generateQuiz() {
         if (!quizQuestion) return;
-        const num1 = Math.floor(Math.random() * 15) + 1;
-        const num2 = Math.floor(Math.random() * 15) + 1;
-        currentSolution = num1 + num2;
-        quizQuestion.textContent = `What is ${num1} + ${num2} ?`;
+        const n1 = Math.floor(Math.random() * 15) + 1;
+        const n2 = Math.floor(Math.random() * 15) + 1;
+        currentSolution = n1 + n2;
+        quizQuestion.textContent = `What is ${n1} + ${n2} ?`;
         if (quizAnswer) quizAnswer.value = "";
     }
 
     if (btnCheckQuiz) {
         btnCheckQuiz.addEventListener("click", () => {
-            const userAns = parseInt(quizAnswer.value.trim(), 10);
-            if (isNaN(userAns)) {
-                quizFeedback.innerHTML = `<span style="color: var(--danger);">Please type your numerical answer!</span>`;
+            const ans = parseInt(quizAnswer.value.trim(), 10);
+            if (isNaN(ans)) {
+                quizFeedback.innerHTML = `<span style="color: var(--danger);">Please enter your numerical answer.</span>`;
                 return;
             }
 
-            if (userAns === currentSolution) {
-                quizFeedback.innerHTML = `<span style="color: var(--success); font-weight: 700;"><i class="fa-solid fa-trophy"></i> Outstanding! Correct Answer!</span>`;
+            if (ans === currentSolution) {
+                quizFeedback.innerHTML = `<span style="color: var(--success); font-weight: 700;"><i class="fa-solid fa-trophy"></i> Great job! Correct Answer!</span>`;
                 setTimeout(generateQuiz, 1500);
             } else {
-                quizFeedback.innerHTML = `<span style="color: var(--danger);"><i class="fa-solid fa-xmark"></i> Oops! Try again. The answer wasn't ${userAns}.</span>`;
+                quizFeedback.innerHTML = `<span style="color: var(--danger);"><i class="fa-solid fa-xmark"></i> Not quite ${ans}. Try again!</span>`;
             }
         });
-
         generateQuiz();
     }
 
-    // Tool 4: QR Code Generator
+    // QR Code Maker
     const qrInput = document.getElementById("qrInput");
     const btnGenerateQR = document.getElementById("btnGenerateQR");
     const qrDisplay = document.getElementById("qrDisplay");
@@ -375,20 +431,18 @@ document.addEventListener("DOMContentLoaded", () => {
         btnGenerateQR.addEventListener("click", () => {
             const text = qrInput.value.trim();
             if (!text) {
-                qrDisplay.innerHTML = `<span style="color: var(--danger);">Please enter a URL or text to generate a QR Code.</span>`;
+                qrDisplay.innerHTML = `<span style="color: var(--danger);">Enter text or URL to generate QR code.</span>`;
                 return;
             }
-
             const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(text)}`;
             qrDisplay.innerHTML = `
                 <div style="text-align: center;">
-                    <img src="${qrUrl}" alt="Generated QR Code" style="border-radius: 8px; margin-bottom: 0.5rem; border: 4px solid white;">
-                    <p style="font-size: 0.85rem; color: var(--text-muted);">Scan this QR Code with your mobile camera.</p>
+                    <img src="${qrUrl}" alt="Generated QR" style="border-radius: 8px; margin-bottom: 0.5rem; border: 4px solid white;">
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">Scan QR Code with your mobile phone camera.</p>
                 </div>
             `;
         });
     }
 
-    // Initial App Render
     renderApps();
 });

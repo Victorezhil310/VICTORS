@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VICTORS - Multi-Utility & Education App</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-rocket logo-icon"></i>
+                <span class="logo-text">VICTORS</span>
+                <span class="badge">APP</span>
+            </a>
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" id="searchInput" placeholder="Search apps, PDF tools, Kids games...">
+            </div>
+            <button id="themeToggle" class="theme-btn"><i class="fa-solid fa-moon"></i></button>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-content">
+            <span class="hero-tag"><i class="fa-solid fa-mobile-screen"></i> Universal Multi-Device Application</span>
+            <h1>VICTORS Multi-Utility Hub</h1>
+            <p>Optimized for Mobile Phones, Tablets, Desktop, Chromebooks, and Android XR spatial screens.</p>
+        </div>
+    </section>
+
+    <main class="main-container">
+        <section class="categories-nav">
+            <button class="cat-btn active" data-category="all"><i class="fa-solid fa-border-all"></i> All</button>
+            <button class="cat-btn" data-category="students"><i class="fa-solid fa-graduation-cap"></i> Education</button>
+            <button class="cat-btn" data-category="pdf"><i class="fa-solid fa-file-pdf"></i> PDF Tools</button>
+            <button class="cat-btn" data-category="kids"><i class="fa-solid fa-child"></i> Kids</button>
+            <button class="cat-btn" data-category="mobile"><i class="fa-solid fa-mobile-screen-button"></i> Mobile</button>
+            <button class="cat-btn" data-category="adults"><i class="fa-solid fa-briefcase"></i> Productivity</button>
+        </section>
+
+        <section class="store-section" id="apps">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-grip-vertical"></i> Installed Suite Modules</h2>
+                <span class="count-badge" id="appCount">Showing Tools</span>
+            </div>
+            <div class="apps-grid" id="appsGrid"></div>
+        </section>
+    </main>
+
+    <div class="modal" id="toolModal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeModal">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

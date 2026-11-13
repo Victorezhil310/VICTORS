@@ -1,0 +1,54 @@
+# ==========================================
+# VICTORS Security & Safety Exclusion Rules
+# DO NOT REMOVE: Prevents pushing keys, build files & IDE secrets
+# ==========================================
+
+# 🔑 Security, Credentials & KeyStores (CRITICAL SAFETY)
+*.jks
+*.keystore
+*.p12
+*.pem
+*.pk8
+*.crt
+*.key
+google-services*.json
+GoogleService-Info*.plist
+local.properties
+secrets.properties
+secrets.xml
+*.env
+.env.*
+
+# 🏗️ Android & Gradle Build Artifacts
+.gradle/
+build/
+app/build/
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+*.aab
+*.aar
+*.dex
+*.class
+
+# 💻 IDE & OS Workspace Files
+.idea/
+.idea/workspace.xml
+.idea/libraries/
+.idea/modules.xml
+.idea/tasks.xml
+*.iml
+.navigation/
+*.swp
+*.bak
+*~
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# 📋 Log Files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

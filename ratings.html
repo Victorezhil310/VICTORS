@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ratings & Reviews - VICTORS</title>
+    <meta name="description" content="Read community ratings and submit feedback for VICTORS multi-utility tools across Mobile, Tablet, Desktop, and Android XR devices.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-rocket logo-icon"></i>
+                <span class="logo-text">VICTORS</span>
+            </a>
+            <nav class="nav-links">
+                <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+                <a href="ratings.html" class="active"><i class="fa-solid fa-star"></i> Ratings</a>
+                <a href="privacy.html"><i class="fa-solid fa-shield-halved"></i> Privacy</a>
+                <a href="terms.html"><i class="fa-solid fa-file-contract"></i> Terms</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="page-container">
+        <h1><i class="fa-solid fa-star" style="color: var(--accent-color);"></i> Community Ratings & Reviews</h1>
+        <p class="subtitle">Share your experience with VICTORS tools across Phones, Tablets, Desktop, and XR environments.</p>
+
+        <!-- Submit Feedback Card -->
+        <section class="rating-form">
+            <h3><i class="fa-solid fa-pen-to-square"></i> Leave a Review</h3>
+            <div class="form-group">
+                <label for="userNameInput">Your Name:</label>
+                <input type="text" id="userNameInput" placeholder="e.g. Alex Johnson" class="form-input">
+            </div>
+
+            <div class="form-group">
+                <label>Select Rating:</label>
+                <div class="star-rating" id="starRating">
+                    <i class="fa-solid fa-star" data-value="1"></i>
+                    <i class="fa-solid fa-star" data-value="2"></i>
+                    <i class="fa-solid fa-star" data-value="3"></i>
+                    <i class="fa-solid fa-star" data-value="4"></i>
+                    <i class="fa-solid fa-star" data-value="5"></i>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="reviewTextInput">Your Review / Feature Suggestion:</label>
+                <textarea id="reviewTextInput" rows="3" placeholder="Tell us how VICTORS helps your study or work..." class="form-input"></textarea>
+            </div>
+
+            <button id="btnSubmitReview" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Submit Rating</button>
+            <div id="reviewFeedback" style="margin-top: 0.5rem;"></div>
+        </section>
+
+        <!-- Existing Community Reviews -->
+        <section class="reviews-list">
+            <h3 style="margin-bottom: 1rem;"><i class="fa-solid fa-comments"></i> Recent User Feedback</h3>
+
+            <div id="reviewsContainer" style="display: flex; flex-direction: column; gap: 1rem;">
+                <div class="stat-card" style="text-align: left;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                        <strong>David K. (Student)</strong>
+                        <span style="color: var(--accent-color); font-weight: 700;">★★★★★</span>
+                    </div>
+                    <p style="font-size: 0.95rem; color: var(--text-muted);">"The GPA Calculator and PDF Text Extractor saved me so much time during exam week. Works seamlessly on my Android tablet and PC browser!"</p>
+                </div>
+
+                <div class="stat-card" style="text-align: left;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                        <strong>Sarah M. (Parent)</strong>
+                        <span style="color: var(--accent-color); font-weight: 700;">★★★★★</span>
+                    </div>
+                    <p style="font-size: 0.95rem; color: var(--text-muted);">"My kids love the math challenge game! It's super safe with no ads or popups. Highly recommended."</p>
+                </div>
+
+                <div class="stat-card" style="text-align: left;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                        <strong>TechExplorer (Android XR User)</strong>
+                        <span style="color: var(--accent-color); font-weight: 700;">★★★★★</span>
+                    </div>
+                    <p style="font-size: 0.95rem; color: var(--text-muted);">"Runs great in spatial multi-window mode on XR devices. Beautiful UI!"</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p>&copy; 2025 VICTORS Community Platform.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple client-side rating logic
+        let selectedStars = 5;
+        const stars = document.querySelectorAll('#starRating i');
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                selectedStars = parseInt(star.dataset.value, 10);
+                stars.forEach(s => {
+                    if (parseInt(s.dataset.value, 10) <= selectedStars) {
+                        s.style.color = 'var(--accent-color)';
+                    } else {
+                        s.style.color = 'var(--card-border)';
+                    }
+                });
+            });
+        });
+
+        document.getElementById('btnSubmitReview').addEventListener('click', () => {
+            const name = document.getElementById('userNameInput').value.trim() || 'Anonymous User';
+            const text = document.getElementById('reviewTextInput').value.trim();
+            const feedback = document.getElementById('reviewFeedback');
+
+            if (!text) {
+                feedback.innerHTML = `<span style="color: var(--danger);">Please enter a review text before submitting.</span>`;
+                return;
+            }
+
+            const starStr = '★'.repeat(selectedStars);
+            const newReviewHtml = `
+                <div class="stat-card" style="text-align: left;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                        <strong>${name}</strong>
+                        <span style="color: var(--accent-color); font-weight: 700;">${starStr}</span>
+                    </div>
+                    <p style="font-size: 0.95rem; color: var(--text-muted);">${text}</p>
+                </div>
+            `;
+
+            document.getElementById('reviewsContainer').insertAdjacentHTML('afterbegin', newReviewHtml);
+            feedback.innerHTML = `<span style="color: var(--success); font-weight: 700;"><i class="fa-solid fa-circle-check"></i> Thank you! Your review has been added.</span>`;
+            document.getElementById('userNameInput').value = '';
+            document.getElementById('reviewTextInput').value = '';
+        });
+    </script>
+</body>
+</html>

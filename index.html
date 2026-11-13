@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VICTORS - Multi-Utility, Kids, Education & PDF Suite</title>
+    <meta name="description" content="VICTORS is an all-in-one digital store and web tools platform featuring mobile utilities, kids games, educational student calculators, PDF tools, and adult productivity tools.">
+    <meta name="keywords" content="VICTORS, PDF tools, kids learning, educational tools, mobile utilities, web apps, student tools">
+    <meta name="author" content="VICTORS Team">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="VICTORS - Digital Tools & Apps Hub">
+    <meta property="og:description" content="Access all mobile utilities, kids games, PDF tools, and student learning tools in one place.">
+    <meta property="og:type" content="website">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- FontAwesome icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-rocket logo-icon"></i>
+                <span class="logo-text">VICTORS</span>
+                <span class="badge">PRO</span>
+            </a>
+
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" id="searchInput" placeholder="Search apps, PDF tools, Kids games, Student calculators...">
+            </div>
+
+            <nav class="nav-links">
+                <a href="#apps" class="active"><i class="fa-solid fa-grid-2"></i> Explore</a>
+                <a href="ratings.html"><i class="fa-solid fa-star"></i> Ratings</a>
+                <a href="privacy.html"><i class="fa-solid fa-shield-halved"></i> Privacy</a>
+                <a href="terms.html"><i class="fa-solid fa-file-contract"></i> Terms</a>
+                <button id="themeToggle" class="theme-btn" title="Toggle Theme">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <span class="hero-tag"><i class="fa-solid fa-sparkles"></i> Ultimate All-In-One Platform</span>
+            <h1>One Suite for Everything You Need</h1>
+            <p>From Student & Educational tools to PDF management, Mobile Utilities, and Kids interactive learning — VICTORS empowers every age group.</p>
+            <div class="hero-actions">
+                <a href="#apps" class="btn btn-primary"><i class="fa-solid fa-play"></i> Launch Apps Store</a>
+                <a href="#featured-tools" class="btn btn-secondary"><i class="fa-solid fa-wand-magic-sparkles"></i> Try PDF & Tools</a>
+            </div>
+        </div>
+        <div class="hero-stats">
+            <div class="stat-card">
+                <h3>50+</h3>
+                <p>Free Tools</p>
+            </div>
+            <div class="stat-card">
+                <h3>4.9 ★</h3>
+                <p>User Rating</p>
+            </div>
+            <div class="stat-card">
+                <h3>100%</h3>
+                <p>Free & Secure</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Filters -->
+    <main class="main-container">
+        <section class="categories-nav">
+            <button class="cat-btn active" data-category="all"><i class="fa-solid fa-border-all"></i> All Categories</button>
+            <button class="cat-btn" data-category="students"><i class="fa-solid fa-graduation-cap"></i> Student & Education</button>
+            <button class="cat-btn" data-category="pdf"><i class="fa-solid fa-file-pdf"></i> PDF Suite</button>
+            <button class="cat-btn" data-category="kids"><i class="fa-solid fa-child"></i> Kids Corner</button>
+            <button class="cat-btn" data-category="mobile"><i class="fa-solid fa-mobile-screen-button"></i> Mobile Utilities</button>
+            <button class="cat-btn" data-category="adults"><i class="fa-solid fa-briefcase"></i> Productivity (Adults)</button>
+        </section>
+
+        <!-- Dynamic Tools & Apps Store Grid -->
+        <section class="store-section" id="apps">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-grip-vertical"></i> Featured Store Apps & Tools</h2>
+                <span class="count-badge" id="appCount">Showing 8 Tools</span>
+            </div>
+
+            <div class="apps-grid" id="appsGrid">
+                <!-- App items rendered dynamically via script.js -->
+            </div>
+        </section>
+
+        <!-- Embedded Interactive Tools Sandbox -->
+        <section class="interactive-sandbox" id="featured-tools">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-toolbox"></i> Instant Live Utilities</h2>
+                <p>Use tools immediately without leaving VICTORS!</p>
+            </div>
+
+            <div class="tool-tabs">
+                <button class="tab-btn active" data-tab="pdf-tool"><i class="fa-solid fa-file-pdf"></i> PDF Text Extractor & Viewer</button>
+                <button class="tab-btn" data-tab="grade-calc"><i class="fa-solid fa-calculator"></i> Student Grade Calculator</button>
+                <button class="tab-btn" data-tab="kids-quiz"><i class="fa-solid fa-gamepad"></i> Kids Math Challenge</button>
+                <button class="tab-btn" data-tab="qr-gen"><i class="fa-solid fa-qrcode"></i> Mobile QR Code Generator</button>
+            </div>
+
+            <div class="tab-contents">
+                <!-- PDF Viewer / Extractor Tool -->
+                <div class="tab-panel active" id="pdf-tool">
+                    <h3><i class="fa-solid fa-file-pdf"></i> Web PDF Tool & Text Converter</h3>
+                    <p>Select a PDF or text file to view content, count words, and export summaries.</p>
+                    <div class="tool-box">
+                        <input type="file" id="pdfFileInput" accept=".pdf,.txt" class="file-input">
+                        <div class="tool-controls">
+                            <button id="btnProcessPdf" class="btn btn-primary"><i class="fa-solid fa-gear"></i> Process Document</button>
+                            <button id="btnClearPdf" class="btn btn-secondary"><i class="fa-solid fa-trash"></i> Clear</button>
+                        </div>
+                        <div class="pdf-output-area" id="pdfOutput">
+                            <em>Select a text/document file above to analyze or view text.</em>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Student Grade Calculator -->
+                <div class="tab-panel" id="grade-calc">
+                    <h3><i class="fa-solid fa-graduation-cap"></i> Student GPA & Percentage Calculator</h3>
+                    <div class="tool-box">
+                        <div class="form-group">
+                            <label for="marksInput">Enter Marks (comma separated, e.g., 85, 92, 78, 90, 88):</label>
+                            <input type="text" id="marksInput" placeholder="85, 92, 78, 90, 88" class="form-input">
+                        </div>
+                        <button id="btnCalcGrade" class="btn btn-primary"><i class="fa-solid fa-calculator"></i> Calculate Grade & GPA</button>
+                        <div class="result-box" id="gradeResult"></div>
+                    </div>
+                </div>
+
+                <!-- Kids Math Quiz -->
+                <div class="tab-panel" id="kids-quiz">
+                    <h3><i class="fa-solid fa-brain"></i> Kids Quick Math Challenge</h3>
+                    <div class="tool-box quiz-box">
+                        <div class="quiz-question" id="quizQuestion">Loading Question...</div>
+                        <div class="quiz-options">
+                            <input type="number" id="quizAnswer" placeholder="Your Answer" class="form-input">
+                            <button id="btnCheckQuiz" class="btn btn-primary"><i class="fa-solid fa-check"></i> Submit</button>
+                        </div>
+                        <div class="quiz-feedback" id="quizFeedback"></div>
+                    </div>
+                </div>
+
+                <!-- QR Generator -->
+                <div class="tab-panel" id="qr-gen">
+                    <h3><i class="fa-solid fa-qrcode"></i> Mobile QR Code & Link Generator</h3>
+                    <div class="tool-box">
+                        <input type="text" id="qrInput" placeholder="Enter URL or Text to convert to QR Code..." class="form-input">
+                        <button id="btnGenerateQR" class="btn btn-primary"><i class="fa-solid fa-qrcode"></i> Generate QR Code</button>
+                        <div class="qr-display" id="qrDisplay"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal for Tool Details -->
+    <div class="modal" id="toolModal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeModal">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <div class="logo">
+                    <i class="fa-solid fa-rocket"></i> VICTORS
+                </div>
+                <p>The premier multi-purpose digital platform for mobile apps, educational toolkits, PDF utilities, and kids learning.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home / Store</a></li>
+                    <li><a href="ratings.html">Ratings & Reviews</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="sitemap.xml">Sitemap</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Categories</h4>
+                <ul>
+                    <li><a href="#apps">Student & Education</a></li>
+                    <li><a href="#apps">PDF Suite</a></li>
+                    <li><a href="#apps">Kids Corner</a></li>
+                    <li><a href="#apps">Mobile Utilities</a></li>
+                    <li><a href="#apps">Productivity</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Google Play Ready</h4>
+                <p>Download VICTORS Android Application APK & AAB package anytime.</p>
+                <div class="store-badge">
+                    <i class="fa-brands fa-google-play"></i> Available for Google Play
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 VICTORS Hub. All rights reserved. Built for Students, Kids, and Professionals worldwide.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -12,7 +12,7 @@ android {
         applicationId = "com.victors.app"
         minSdk = 24
         targetSdk = 36
-        versionCode = 2000
+        versionCode = 2001
         versionName = "1.0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

@@ -12,7 +12,7 @@ android {
         applicationId = "com.victors.app"
         minSdk = 24
         targetSdk = 36
-        versionCode = 2002
+        versionCode = 2001
         versionName = "1.0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -71,4 +71,7 @@ dependencies {
 
     // Google Mobile Ads (AdMob) SDK
     implementation("com.google.android.gms:play-services-ads:23.6.0")
+
+    // Google Play Services Auth (Google Sign-In)
+    implementation("com.google.android.gms:play-services-auth:21.3.0")
 }

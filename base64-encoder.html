@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base64 Encoder & Decoder - VICTORS</title>
+    <meta name="description" content="Encode and decode text strings to Base64 format online.">
+    <meta name="google-site-verification" content="-nL85juUcE0o48CM-D_4I4YDGWaBoP1PN6BFCYSphl0" />
+    <meta name="google-site-verification" content="FZkuRB-0Q_93gsD0MqGl-AYHHhZEO5352zcOegGGKi4" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo"><i class="fa-solid fa-layer-group logo-icon"></i><span class="logo-text">VICTORS</span></a>
+            <nav class="nav-links"><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></nav>
+        </div>
+    </header>
+
+    <main class="page-container">
+        <h1><i class="fa-solid fa-code" style="color: var(--secondary-color);"></i> Base64 Encoder & Decoder</h1>
+        <p class="subtitle">Convert raw text into Base64 format or decode Base64 strings.</p>
+
+        <div class="tool-box">
+            <textarea id="baseInput" rows="6" class="form-input" placeholder="Type text or Base64 string here..."></textarea>
+            <div style="display: flex; gap: 0.8rem;">
+                <button id="btnEncode" class="btn btn-primary">Encode to Base64</button>
+                <button id="btnDecode" class="btn btn-secondary">Decode Base64</button>
+            </div>
+            <div class="result-box" id="baseResult">Output will appear here.</div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById("btnEncode").addEventListener("click", () => {
+            try {
+                const encoded = btoa(document.getElementById("baseInput").value);
+                document.getElementById("baseResult").textContent = encoded;
+            } catch(e) { document.getElementById("baseResult").textContent = "Encoding Error!"; }
+        });
+        document.getElementById("btnDecode").addEventListener("click", () => {
+            try {
+                const decoded = atob(document.getElementById("baseInput").value);
+                document.getElementById("baseResult").textContent = decoded;
+            } catch(e) { document.getElementById("baseResult").textContent = "Decoding Error!"; }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Formatter & Minifier - VICTORS</title>
+    <meta name="description" content="Format, beautify, minify, and validate JSON code online.">
+    <meta name="google-site-verification" content="-nL85juUcE0o48CM-D_4I4YDGWaBoP1PN6BFCYSphl0" />
+    <meta name="google-site-verification" content="FZkuRB-0Q_93gsD0MqGl-AYHHhZEO5352zcOegGGKi4" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo"><i class="fa-solid fa-layer-group logo-icon"></i><span class="logo-text">VICTORS</span></a>
+            <nav class="nav-links"><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></nav>
+        </div>
+    </header>
+
+    <main class="page-container">
+        <h1><i class="fa-solid fa-code" style="color: var(--secondary-color);"></i> JSON Formatter & Minifier</h1>
+        <p class="subtitle">Format, validate, or minify JSON data online.</p>
+
+        <div class="tool-box">
+            <textarea id="jsonInput" rows="8" class="form-input" placeholder='{"name":"VICTORS","type":"Tools"}'></textarea>
+            <div style="display: flex; gap: 0.8rem;">
+                <button id="btnFormatJson" class="btn btn-primary">Format (Beautify)</button>
+                <button id="btnMinifyJson" class="btn btn-secondary">Minify JSON</button>
+            </div>
+            <div class="result-box" id="jsonResult">Formatted JSON output will appear here.</div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById("btnFormatJson").addEventListener("click", () => {
+            const raw = document.getElementById("jsonInput").value;
+            const resBox = document.getElementById("jsonResult");
+            try {
+                const parsed = JSON.parse(raw);
+                resBox.innerHTML = `<pre style="white-space: pre-wrap;">${JSON.stringify(parsed, null, 4)}</pre>`;
+            } catch (e) {
+                resBox.innerHTML = `<span style="color: var(--danger);">Invalid JSON Syntax: ${e.message}</span>`;
+            }
+        });
+
+        document.getElementById("btnMinifyJson").addEventListener("click", () => {
+            const raw = document.getElementById("jsonInput").value;
+            const resBox = document.getElementById("jsonResult");
+            try {
+                const parsed = JSON.parse(raw);
+                resBox.innerHTML = `<pre style="white-space: pre-wrap;">${JSON.stringify(parsed)}</pre>`;
+            } catch (e) {
+                resBox.innerHTML = `<span style="color: var(--danger);">Invalid JSON Syntax: ${e.message}</span>`;
+            }
+        });
+    </script>
+</body>
+</html>

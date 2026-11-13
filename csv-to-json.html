@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV to JSON Converter - VICTORS</title>
+    <meta name="description" content="Convert CSV table data into JSON objects online.">
+    <meta name="google-site-verification" content="-nL85juUcE0o48CM-D_4I4YDGWaBoP1PN6BFCYSphl0" />
+    <meta name="google-site-verification" content="FZkuRB-0Q_93gsD0MqGl-AYHHhZEO5352zcOegGGKi4" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo"><i class="fa-solid fa-layer-group logo-icon"></i><span class="logo-text">VICTORS</span></a>
+            <nav class="nav-links"><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></nav>
+        </div>
+    </header>
+
+    <main class="page-container">
+        <h1><i class="fa-solid fa-table" style="color: var(--accent-color);"></i> CSV to JSON Converter</h1>
+        <p class="subtitle">Convert comma separated values into formatted JSON arrays.</p>
+
+        <div class="tool-box">
+            <textarea id="csvInput" rows="6" class="form-input" placeholder="name,age,city&#10;Alex,24,NY&#10;Sarah,22,LA"></textarea>
+            <button id="btnConvertCsv" class="btn btn-primary"><i class="fa-solid fa-brackets-curly"></i> Convert to JSON</button>
+            <div class="result-box" id="csvResult">JSON result will appear here.</div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById("btnConvertCsv").addEventListener("click", () => {
+            const raw = document.getElementById("csvInput").value.trim();
+            if (!raw) return;
+            const lines = raw.split("\n");
+            const headers = lines[0].split(",").map(h => h.trim());
+            const jsonArr = [];
+
+            for (let i = 1; i < lines.length; i++) {
+                const vals = lines[i].split(",").map(v => v.trim());
+                if (vals.length === headers.length) {
+                    const obj = {};
+                    headers.forEach((h, idx) => obj[h] = vals[idx]);
+                    jsonArr.push(obj);
+                }
+            }
+            document.getElementById("csvResult").innerHTML = `<pre style="white-space: pre-wrap;">${JSON.stringify(jsonArr, null, 2)}</pre>`;
+        });
+    </script>
+</body>
+</html>

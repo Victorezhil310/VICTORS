@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus Pomodoro Timer - VICTORS</title>
+    <meta name="description" content="Boost work and study concentration using 25-minute Pomodoro focus blocks and 5-minute break timers.">
+    <meta name="google-site-verification" content="-nL85juUcE0o48CM-D_4I4YDGWaBoP1PN6BFCYSphl0" />
+    <meta name="google-site-verification" content="FZkuRB-0Q_93gsD0MqGl-AYHHhZEO5352zcOegGGKi4" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo"><i class="fa-solid fa-layer-group logo-icon"></i><span class="logo-text">VICTORS</span></a>
+            <nav class="nav-links"><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></nav>
+        </div>
+    </header>
+
+    <main class="page-container">
+        <h1><i class="fa-solid fa-hourglass-half" style="color: var(--danger);"></i> Focus Pomodoro Timer</h1>
+        <p class="subtitle">25-minute work session followed by 5-minute rest breaks.</p>
+
+        <div class="tool-box" style="text-align: center;">
+            <div id="timerDisplay" style="font-size: 4rem; font-weight: 800; color: var(--secondary-color); margin: 1rem 0;">25:00</div>
+            <div style="display: flex; justify-content: center; gap: 1rem;">
+                <button id="btnStartTimer" class="btn btn-primary"><i class="fa-solid fa-play"></i> Start Session</button>
+                <button id="btnResetTimer" class="btn btn-secondary"><i class="fa-solid fa-rotate-left"></i> Reset</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let timeLeft = 25 * 60;
+        let timerId = null;
+
+        function formatTime(s) {
+            const m = Math.floor(s / 60);
+            const sec = s % 60;
+            return `${m < 10 ? '0' : ''}${m}:${sec < 10 ? '0' : ''}${sec}`;
+        }
+
+        document.getElementById("btnStartTimer").addEventListener("click", () => {
+            if (timerId) { clearInterval(timerId); timerId = null; document.getElementById("btnStartTimer").innerHTML = `<i class="fa-solid fa-play"></i> Resume`; return; }
+            document.getElementById("btnStartTimer").innerHTML = `<i class="fa-solid fa-pause"></i> Pause`;
+            timerId = setInterval(() => {
+                if (timeLeft > 0) {
+                    timeLeft--;
+                    document.getElementById("timerDisplay").textContent = formatTime(timeLeft);
+                } else {
+                    clearInterval(timerId); timerId = null;
+                    alert("Pomodoro Session Complete! Take a 5-minute break.");
+                }
+            }, 1000);
+        });
+
+        document.getElementById("btnResetTimer").addEventListener("click", () => {
+            if (timerId) clearInterval(timerId);
+            timerId = null;
+            timeLeft = 25 * 60;
+            document.getElementById("timerDisplay").textContent = "25:00";
+            document.getElementById("btnStartTimer").innerHTML = `<i class="fa-solid fa-play"></i> Start Session`;
+        });
+    </script>
+</body>
+</html>

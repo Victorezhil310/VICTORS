@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>21-Day Habit Tracker - VICTORS</title>
+    <meta name="description" content="Build positive daily habits with streak counters and daily check-ins.">
+    <meta name="google-site-verification" content="-nL85juUcE0o48CM-D_4I4YDGWaBoP1PN6BFCYSphl0" />
+    <meta name="google-site-verification" content="FZkuRB-0Q_93gsD0MqGl-AYHHhZEO5352zcOegGGKi4" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo"><i class="fa-solid fa-layer-group logo-icon"></i><span class="logo-text">VICTORS</span></a>
+            <nav class="nav-links"><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></nav>
+        </div>
+    </header>
+
+    <main class="page-container">
+        <h1><i class="fa-solid fa-fire" style="color: var(--accent-color);"></i> 21-Day Habit Streak Tracker</h1>
+        <p class="subtitle">Track daily habits and maintain your streak.</p>
+
+        <div class="tool-box" style="text-align: center;">
+            <div id="streakCount" style="font-size: 3rem; font-weight: 800; color: var(--primary-color);">🔥 0 Day Streak</div>
+            <button id="btnCheckIn" class="btn btn-primary" style="margin-top: 1rem;"><i class="fa-solid fa-check"></i> Complete Today's Habit</button>
+        </div>
+    </main>
+
+    <script>
+        let streak = parseInt(localStorage.getItem("victorsStreak") || "0", 10);
+        document.getElementById("streakCount").textContent = `🔥 ${streak} Day Streak`;
+
+        document.getElementById("btnCheckIn").addEventListener("click", () => {
+            streak++;
+            localStorage.setItem("victorsStreak", streak);
+            document.getElementById("streakCount").textContent = `🔥 ${streak} Day Streak`;
+            alert("Awesome! Today's habit recorded!");
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pro Tasks Kanban Board - VICTORS</title>
+    <meta name="description" content="Organize daily work tasks with interactive Kanban columns.">
+    <meta name="google-site-verification" content="-nL85juUcE0o48CM-D_4I4YDGWaBoP1PN6BFCYSphl0" />
+    <meta name="google-site-verification" content="FZkuRB-0Q_93gsD0MqGl-AYHHhZEO5352zcOegGGKi4" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo"><i class="fa-solid fa-layer-group logo-icon"></i><span class="logo-text">VICTORS</span></a>
+            <nav class="nav-links"><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></nav>
+        </div>
+    </header>
+
+    <main class="page-container">
+        <h1><i class="fa-solid fa-list-check" style="color: var(--secondary-color);"></i> Pro Tasks Kanban Board</h1>
+        <p class="subtitle">Add tasks and manage daily priorities.</p>
+
+        <div class="tool-box">
+            <div style="display: flex; gap: 0.8rem;">
+                <input type="text" id="taskInput" placeholder="Enter task title..." class="form-input">
+                <button id="btnAddTask" class="btn btn-primary">Add Task</button>
+            </div>
+            <ul id="taskList" style="list-style: none; margin-top: 1rem; padding: 0;"></ul>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById("btnAddTask").addEventListener("click", () => {
+            const input = document.getElementById("taskInput");
+            const val = input.value.trim();
+            if (!val) return;
+
+            const li = document.createElement("li");
+            li.style.cssText = "background: var(--bg-color); padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid var(--card-border); margin-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center;";
+            li.innerHTML = `<span>${val}</span><button onclick="this.parentElement.remove()" style="background: var(--danger); color: white; border: none; border-radius: 4px; padding: 0.2rem 0.5rem; cursor: pointer;">Remove</button>`;
+            document.getElementById("taskList").appendChild(li);
+            input.value = "";
+        });
+    </script>
+</body>
+</html>

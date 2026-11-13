@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Grade & GPA Calculator - VICTORS</title>
+    <meta name="description" content="Calculate semester GPA, percentage marks, letter grades, and subject averages free online.">
+    <meta name="google-site-verification" content="-nL85juUcE0o48CM-D_4I4YDGWaBoP1PN6BFCYSphl0" />
+    <meta name="google-site-verification" content="FZkuRB-0Q_93gsD0MqGl-AYHHhZEO5352zcOegGGKi4" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo"><i class="fa-solid fa-layer-group logo-icon"></i><span class="logo-text">VICTORS</span></a>
+            <nav class="nav-links"><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></nav>
+        </div>
+    </header>
+
+    <main class="page-container">
+        <h1><i class="fa-solid fa-graduation-cap" style="color: var(--primary-color);"></i> Student Marks & GPA Calculator</h1>
+        <p class="subtitle">Enter your subject scores to instantly convert percentage into GPA and letter grades.</p>
+
+        <div class="tool-box">
+            <div class="form-group">
+                <label for="marksInput">Enter Marks (comma separated, e.g. 88, 95, 78, 92, 85):</label>
+                <input type="text" id="marksInput" placeholder="88, 95, 78, 92, 85" class="form-input">
+            </div>
+            <button id="btnCalcGrade" class="btn btn-primary"><i class="fa-solid fa-calculator"></i> Calculate GPA & Letter Grade</button>
+            <div class="result-box" id="gradeResult"></div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById("btnCalcGrade").addEventListener("click", () => {
+            const raw = document.getElementById("marksInput").value.trim();
+            const resBox = document.getElementById("gradeResult");
+            if (!raw) { resBox.innerHTML = `<span style="color: var(--danger);">Enter comma separated marks.</span>`; return; }
+            const numbers = raw.split(',').map(n => parseFloat(n.trim())).filter(n => !isNaN(n));
+            if (numbers.length === 0) { resBox.innerHTML = `<span style="color: var(--danger);">No valid numerical marks found.</span>`; return; }
+
+            const total = numbers.reduce((a, b) => a + b, 0);
+            const avg = total / numbers.length;
+            const gpa = (avg / 20).toFixed(2);
+            let gradeLetter = "F";
+            if (avg >= 90) gradeLetter = "A+";
+            else if (avg >= 80) gradeLetter = "A";
+            else if (avg >= 70) gradeLetter = "B";
+            else if (avg >= 60) gradeLetter = "C";
+            else if (avg >= 50) gradeLetter = "D";
+
+            resBox.innerHTML = `
+                <div><strong>Average Score:</strong> ${avg.toFixed(2)}%</div>
+                <div><strong>Estimated GPA:</strong> ${gpa} / 5.0</div>
+                <div><strong>Grade Letter:</strong> <span style="font-size: 1.2rem; font-weight: 800; color: var(--primary-color);">${gradeLetter}</span></div>
+            `;
+        });
+    </script>
+</body>
+</html>

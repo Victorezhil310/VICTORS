@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan EMI & Interest Calculator - VICTORS</title>
+    <meta name="description" content="Calculate monthly EMI, interest payable, and loan repayment schedules.">
+    <meta name="google-site-verification" content="-nL85juUcE0o48CM-D_4I4YDGWaBoP1PN6BFCYSphl0" />
+    <meta name="google-site-verification" content="FZkuRB-0Q_93gsD0MqGl-AYHHhZEO5352zcOegGGKi4" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo"><i class="fa-solid fa-layer-group logo-icon"></i><span class="logo-text">VICTORS</span></a>
+            <nav class="nav-links"><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></nav>
+        </div>
+    </header>
+
+    <main class="page-container">
+        <h1><i class="fa-solid fa-landmark" style="color: var(--primary-color);"></i> Loan EMI & Interest Calculator</h1>
+        <p class="subtitle">Compute monthly loan repayments and total payable interest.</p>
+
+        <div class="tool-box">
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <div class="form-group" style="flex: 1;"><label for="loanAmt">Loan Amount ($):</label><input type="number" id="loanAmt" value="10000" class="form-input"></div>
+                <div class="form-group" style="flex: 1;"><label for="loanRate">Annual Interest Rate (%):</label><input type="number" id="loanRate" value="8" step="0.1" class="form-input"></div>
+                <div class="form-group" style="flex: 1;"><label for="loanTenure">Tenure (Years):</label><input type="number" id="loanTenure" value="3" class="form-input"></div>
+            </div>
+            <button id="btnCalcLoan" class="btn btn-primary"><i class="fa-solid fa-calculator"></i> Calculate EMI</button>
+            <div class="result-box" id="loanResult">Result will appear here.</div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById("btnCalcLoan").addEventListener("click", () => {
+            const p = parseFloat(document.getElementById("loanAmt").value);
+            const r = parseFloat(document.getElementById("loanRate").value) / 12 / 100;
+            const n = parseFloat(document.getElementById("loanTenure").value) * 12;
+            const resBox = document.getElementById("loanResult");
+
+            if (isNaN(p) || isNaN(r) || isNaN(n) || n <= 0) { resBox.innerHTML = `<span style="color: var(--danger);">Enter valid loan parameters.</span>`; return; }
+
+            const emi = (p * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+            const totalPayable = emi * n;
+            const totalInterest = totalPayable - p;
+
+            resBox.innerHTML = `
+                <div><strong>Monthly EMI:</strong> $${emi.toFixed(2)}</div>
+                <div><strong>Total Interest:</strong> $${totalInterest.toFixed(2)}</div>
+                <div><strong>Total Amount Payable:</strong> $${totalPayable.toFixed(2)}</div>
+            `;
+        });
+    </script>
+</body>
+</html>

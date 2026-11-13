@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Unit Converter - VICTORS</title>
+    <meta name="description" content="Convert distance, weight, temperature, area, speed, and volume instantly online.">
+    <meta name="google-site-verification" content="-nL85juUcE0o48CM-D_4I4YDGWaBoP1PN6BFCYSphl0" />
+    <meta name="google-site-verification" content="FZkuRB-0Q_93gsD0MqGl-AYHHhZEO5352zcOegGGKi4" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo"><i class="fa-solid fa-layer-group logo-icon"></i><span class="logo-text">VICTORS</span></a>
+            <nav class="nav-links"><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></nav>
+        </div>
+    </header>
+
+    <main class="page-container">
+        <h1><i class="fa-solid fa-arrows-rotate" style="color: var(--accent-color);"></i> Universal Unit Converter</h1>
+        <p class="subtitle">Convert distance, weight, temperature, and speed units in real time.</p>
+
+        <div class="tool-box">
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <input type="number" id="unitValue" placeholder="Enter Value" value="10" class="form-input" style="flex: 1;">
+                <select id="unitType" class="form-input" style="flex: 1;">
+                    <option value="km-miles">Kilometers to Miles</option>
+                    <option value="miles-km">Miles to Kilometers</option>
+                    <option value="kg-lbs">Kilograms to Pounds (lbs)</option>
+                    <option value="c-f">Celsius to Fahrenheit</option>
+                </select>
+            </div>
+            <button id="btnConvertUnit" class="btn btn-primary"><i class="fa-solid fa-equals"></i> Convert Value</button>
+            <div class="result-box" id="unitResult">Result will appear here.</div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById("btnConvertUnit").addEventListener("click", () => {
+            const val = parseFloat(document.getElementById("unitValue").value);
+            const type = document.getElementById("unitType").value;
+            const resBox = document.getElementById("unitResult");
+            if (isNaN(val)) { resBox.innerHTML = `<span style="color: var(--danger);">Enter a valid number.</span>`; return; }
+
+            let resText = "";
+            if (type === "km-miles") resText = `${val} km = ${(val * 0.621371).toFixed(2)} miles`;
+            else if (type === "miles-km") resText = `${val} miles = ${(val / 0.621371).toFixed(2)} km`;
+            else if (type === "kg-lbs") resText = `${val} kg = ${(val * 2.20462).toFixed(2)} lbs`;
+            else if (type === "c-f") resText = `${val}°C = ${((val * 9/5) + 32).toFixed(2)}°F`;
+
+            resBox.innerHTML = `<strong>Result:</strong> ${resText}`;
+        });
+    </script>
+</body>
+</html>

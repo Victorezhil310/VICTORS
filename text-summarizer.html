@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Text Summarizer - VICTORS</title>
+    <meta name="description" content="Summarize long articles, PDF text, and study notes into key bullet points online.">
+    <meta name="google-site-verification" content="-nL85juUcE0o48CM-D_4I4YDGWaBoP1PN6BFCYSphl0" />
+    <meta name="google-site-verification" content="FZkuRB-0Q_93gsD0MqGl-AYHHhZEO5352zcOegGGKi4" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo"><i class="fa-solid fa-layer-group logo-icon"></i><span class="logo-text">VICTORS</span></a>
+            <nav class="nav-links"><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></nav>
+        </div>
+    </header>
+
+    <main class="page-container">
+        <h1><i class="fa-solid fa-compress" style="color: var(--primary-color);"></i> Smart Text Summarizer</h1>
+        <p class="subtitle">Paste long text to condense into key takeaways.</p>
+
+        <div class="tool-box">
+            <textarea id="sumInput" rows="7" class="form-input" placeholder="Paste article or essay text here..."></textarea>
+            <button id="btnSummarize" class="btn btn-primary"><i class="fa-solid fa-bolt"></i> Summarize Text</button>
+            <div class="result-box" id="sumResult">Summary output will appear here.</div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById("btnSummarize").addEventListener("click", () => {
+            const raw = document.getElementById("sumInput").value.trim();
+            const resBox = document.getElementById("sumResult");
+            if (!raw) { resBox.innerHTML = `<span style="color: var(--danger);">Paste text first!</span>`; return; }
+
+            const sentences = raw.split('.').filter(s => s.trim().length > 10);
+            const bullets = sentences.slice(0, Math.min(4, sentences.length));
+            resBox.innerHTML = `
+                <div style="color: var(--success); font-weight: 700; margin-bottom: 0.5rem;"><i class="fa-solid fa-check"></i> Key Summary Points:</div>
+                <ul style="padding-left: 1.2rem;">${bullets.map(b => `<li>${b.trim()}.</li>`).join('')}</ul>
+            `;
+        });
+    </script>
+</body>
+</html>

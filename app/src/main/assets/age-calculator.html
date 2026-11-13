@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exact Age & Birthday Calculator - VICTORS</title>
+    <meta name="description" content="Calculate your exact age in years, months, days, and hours free online.">
+    <meta name="google-site-verification" content="-nL85juUcE0o48CM-D_4I4YDGWaBoP1PN6BFCYSphl0" />
+    <meta name="google-site-verification" content="FZkuRB-0Q_93gsD0MqGl-AYHHhZEO5352zcOegGGKi4" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo"><i class="fa-solid fa-layer-group logo-icon"></i><span class="logo-text">VICTORS</span></a>
+            <nav class="nav-links"><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></nav>
+        </div>
+    </header>
+
+    <main class="page-container">
+        <h1><i class="fa-solid fa-cake-candles" style="color: var(--accent-color);"></i> Exact Age & Birthday Calculator</h1>
+        <p class="subtitle">Select your birth date to calculate years, months, and days lived.</p>
+
+        <div class="tool-box">
+            <div class="form-group"><label for="birthDate">Select Date of Birth:</label><input type="date" id="birthDate" class="form-input"></div>
+            <button id="btnCalcAge" class="btn btn-primary"><i class="fa-solid fa-calculator"></i> Calculate Age</button>
+            <div class="result-box" id="ageResult">Result will appear here.</div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById("btnCalcAge").addEventListener("click", () => {
+            const dob = new Date(document.getElementById("birthDate").value);
+            const resBox = document.getElementById("ageResult");
+            if (isNaN(dob)) { resBox.innerHTML = `<span style="color: var(--danger);">Select a valid date.</span>`; return; }
+
+            const now = new Date();
+            let years = now.getFullYear() - dob.getFullYear();
+            let months = now.getMonth() - dob.getMonth();
+            let days = now.getDate() - dob.getDate();
+
+            if (days < 0) { months--; days += 30; }
+            if (months < 0) { years--; months += 12; }
+
+            const totalDays = Math.floor((now - dob) / (1000 * 60 * 60 * 24));
+            resBox.innerHTML = `
+                <div><strong>Age:</strong> ${years} Years, ${months} Months, ${days} Days</div>
+                <div><strong>Total Days Lived:</strong> ${totalDays} Days</div>
+            `;
+        });
+    </script>
+</body>
+</html>

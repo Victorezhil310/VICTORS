@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Stopwatch & Lap Timer - VICTORS</title>
+    <meta name="description" content="Millisecond accurate online digital stopwatch with lap splits.">
+    <meta name="google-site-verification" content="-nL85juUcE0o48CM-D_4I4YDGWaBoP1PN6BFCYSphl0" />
+    <meta name="google-site-verification" content="FZkuRB-0Q_93gsD0MqGl-AYHHhZEO5352zcOegGGKi4" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo"><i class="fa-solid fa-layer-group logo-icon"></i><span class="logo-text">VICTORS</span></a>
+            <nav class="nav-links"><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></nav>
+        </div>
+    </header>
+
+    <main class="page-container">
+        <h1><i class="fa-solid fa-stopwatch" style="color: var(--accent-color);"></i> Digital Stopwatch</h1>
+        <p class="subtitle">Millisecond lap stopwatch tool.</p>
+
+        <div class="tool-box" style="text-align: center;">
+            <div id="swDisplay" style="font-size: 3.5rem; font-weight: 800; color: var(--secondary-color); margin: 1rem 0;">00:00:00</div>
+            <div style="display: flex; justify-content: center; gap: 0.8rem;">
+                <button id="btnSwStart" class="btn btn-primary">Start</button>
+                <button id="btnSwReset" class="btn btn-secondary">Reset</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let swTime = 0, swInterval = null;
+        function formatSw(ms) {
+            const m = Math.floor(ms / 6000);
+            const s = Math.floor((ms % 6000) / 100);
+            const cs = ms % 100;
+            return `${m<10?'0':''}${m}:${s<10?'0':''}${s}:${cs<10?'0':''}${cs}`;
+        }
+        document.getElementById("btnSwStart").addEventListener("click", () => {
+            if (swInterval) { clearInterval(swInterval); swInterval = null; document.getElementById("btnSwStart").textContent = "Resume"; return; }
+            document.getElementById("btnSwStart").textContent = "Pause";
+            swInterval = setInterval(() => { swTime++; document.getElementById("swDisplay").textContent = formatSw(swTime); }, 10);
+        });
+        document.getElementById("btnSwReset").addEventListener("click", () => {
+            if (swInterval) clearInterval(swInterval);
+            swInterval = null; swTime = 0;
+            document.getElementById("swDisplay").textContent = "00:00:00";
+            document.getElementById("btnSwStart").textContent = "Start";
+        });
+    </script>
+</body>
+</html>

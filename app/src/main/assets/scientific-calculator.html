@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scientific Calculator - VICTORS</title>
+    <meta name="description" content="Online scientific calculator supporting sin, cos, tan, log, square root, powers, and brackets.">
+    <meta name="google-site-verification" content="-nL85juUcE0o48CM-D_4I4YDGWaBoP1PN6BFCYSphl0" />
+    <meta name="google-site-verification" content="FZkuRB-0Q_93gsD0MqGl-AYHHhZEO5352zcOegGGKi4" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo"><i class="fa-solid fa-layer-group logo-icon"></i><span class="logo-text">VICTORS</span></a>
+            <nav class="nav-links"><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></nav>
+        </div>
+    </header>
+
+    <main class="page-container">
+        <h1><i class="fa-solid fa-calculator" style="color: var(--secondary-color);"></i> Scientific Calculator</h1>
+        <p class="subtitle">Compute advanced mathematical expressions online.</p>
+
+        <div class="tool-box">
+            <input type="text" id="calcExpr" placeholder="e.g. Math.sin(Math.PI/2) + 10 * 5" class="form-input">
+            <button id="btnComputeMath" class="btn btn-primary"><i class="fa-solid fa-equals"></i> Calculate Result</button>
+            <div class="result-box" id="calcResult">Result will appear here.</div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById("btnComputeMath").addEventListener("click", () => {
+            const expr = document.getElementById("calcExpr").value.trim();
+            const resBox = document.getElementById("calcResult");
+            if (!expr) { resBox.innerHTML = `<span style="color: var(--danger);">Type a math expression.</span>`; return; }
+            try {
+                const result = Function('"use strict";return (' + expr + ')')();
+                resBox.innerHTML = `<strong>Result:</strong> ${result}`;
+            } catch (e) {
+                resBox.innerHTML = `<span style="color: var(--danger);">Invalid Expression!</span>`;
+            }
+        });
+    </script>
+</body>
+</html>

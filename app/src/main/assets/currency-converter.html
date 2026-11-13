@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Currency Calculator - VICTORS</title>
+    <meta name="description" content="Convert global currencies USD, EUR, GBP, INR online.">
+    <meta name="google-site-verification" content="-nL85juUcE0o48CM-D_4I4YDGWaBoP1PN6BFCYSphl0" />
+    <meta name="google-site-verification" content="FZkuRB-0Q_93gsD0MqGl-AYHHhZEO5352zcOegGGKi4" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo"><i class="fa-solid fa-layer-group logo-icon"></i><span class="logo-text">VICTORS</span></a>
+            <nav class="nav-links"><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></nav>
+        </div>
+    </header>
+
+    <main class="page-container">
+        <h1><i class="fa-solid fa-coins" style="color: var(--secondary-color);"></i> Currency Calculator</h1>
+        <p class="subtitle">Quick currency exchange estimates.</p>
+
+        <div class="tool-box">
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <input type="number" id="currAmt" value="100" class="form-input" style="flex: 1;">
+                <select id="currFrom" class="form-input" style="flex: 1;"><option value="USD">USD ($)</option><option value="EUR">EUR (€)</option><option value="GBP">GBP (£)</option></select>
+                <select id="currTo" class="form-input" style="flex: 1;"><option value="EUR">EUR (€)</option><option value="INR">INR (₹)</option><option value="USD">USD ($)</option></select>
+            </div>
+            <button id="btnConvertCurr" class="btn btn-primary">Convert Currency</button>
+            <div class="result-box" id="currResult">Result will appear here.</div>
+        </div>
+    </main>
+
+    <script>
+        const rates = { USD: 1.0, EUR: 0.92, GBP: 0.79, INR: 83.2 };
+        document.getElementById("btnConvertCurr").addEventListener("click", () => {
+            const amt = parseFloat(document.getElementById("currAmt").value);
+            const from = document.getElementById("currFrom").value;
+            const to = document.getElementById("currTo").value;
+            if (isNaN(amt)) return;
+
+            const converted = (amt / rates[from]) * rates[to];
+            document.getElementById("currResult").innerHTML = `<strong>${amt} ${from}</strong> = <strong>${converted.toFixed(2)} ${to}</strong>`;
+        });
+    </script>
+</body>
+</html>

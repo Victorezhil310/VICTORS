@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Flashcard Generator - VICTORS</title>
+    <meta name="description" content="Create flip flashcards for exam revision and study recall testing.">
+    <meta name="google-site-verification" content="-nL85juUcE0o48CM-D_4I4YDGWaBoP1PN6BFCYSphl0" />
+    <meta name="google-site-verification" content="FZkuRB-0Q_93gsD0MqGl-AYHHhZEO5352zcOegGGKi4" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo"><i class="fa-solid fa-layer-group logo-icon"></i><span class="logo-text">VICTORS</span></a>
+            <nav class="nav-links"><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></nav>
+        </div>
+    </header>
+
+    <main class="page-container">
+        <h1><i class="fa-solid fa-clone" style="color: var(--secondary-color);"></i> Study Flashcard Generator</h1>
+        <p class="subtitle">Flip flashcards for active study recall.</p>
+
+        <div class="tool-box">
+            <div id="flashcardCard" style="background: var(--bg-color); border: 2px solid var(--primary-color); border-radius: 12px; padding: 3rem; text-align: center; font-size: 1.5rem; font-weight: 700; cursor: pointer;">
+                Click to flip: What is the capital of France?
+            </div>
+            <button id="btnNextCard" class="btn btn-primary" style="margin-top: 1rem;"><i class="fa-solid fa-arrow-right"></i> Next Flashcard</button>
+        </div>
+    </main>
+
+    <script>
+        const cards = [
+            { q: "What is the capital of France?", a: "Paris" },
+            { q: "What is 15 × 12?", a: "180" },
+            { q: "What planet is closest to the Sun?", a: "Mercury" }
+        ];
+        let idx = 0, isAnswer = false;
+        const fc = document.getElementById("flashcardCard");
+
+        fc.addEventListener("click", () => {
+            isAnswer = !isAnswer;
+            fc.textContent = isAnswer ? cards[idx].a : cards[idx].q;
+            fc.style.borderColor = isAnswer ? "var(--success)" : "var(--primary-color)";
+        });
+
+        document.getElementById("btnNextCard").addEventListener("click", () => {
+            idx = (idx + 1) % cards.length;
+            isAnswer = false;
+            fc.textContent = cards[idx].q;
+            fc.style.borderColor = "var(--primary-color)";
+        });
+    </script>
+</body>
+</html>

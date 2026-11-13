@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Diff & Compare Tool - VICTORS</title>
+    <meta name="description" content="Compare two text files side by side and highlight differences.">
+    <meta name="google-site-verification" content="-nL85juUcE0o48CM-D_4I4YDGWaBoP1PN6BFCYSphl0" />
+    <meta name="google-site-verification" content="FZkuRB-0Q_93gsD0MqGl-AYHHhZEO5352zcOegGGKi4" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo"><i class="fa-solid fa-layer-group logo-icon"></i><span class="logo-text">VICTORS</span></a>
+            <nav class="nav-links"><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></nav>
+        </div>
+    </header>
+
+    <main class="page-container">
+        <h1><i class="fa-solid fa-code-compare" style="color: var(--secondary-color);"></i> Text Diff & Compare Tool</h1>
+        <p class="subtitle">Compare original vs modified text side by side.</p>
+
+        <div class="tool-box">
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <textarea id="textA" rows="6" class="form-input" placeholder="Original text..." style="flex: 1;"></textarea>
+                <textarea id="textB" rows="6" class="form-input" placeholder="Modified text..." style="flex: 1;"></textarea>
+            </div>
+            <button id="btnCompareText" class="btn btn-primary"><i class="fa-solid fa-code-compare"></i> Compare Texts</button>
+            <div class="result-box" id="diffResult">Comparison result will appear here.</div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById("btnCompareText").addEventListener("click", () => {
+            const a = document.getElementById("textA").value.split("\n");
+            const b = document.getElementById("textB").value.split("\n");
+            let diffHtml = "";
+
+            const max = Math.max(a.length, b.length);
+            for (let i = 0; i < max; i++) {
+                const lineA = a[i] || "";
+                const lineB = b[i] || "";
+                if (lineA === lineB) diffHtml += `<div style="color: var(--text-muted);">Line ${i+1}: ${lineA}</div>`;
+                else diffHtml += `<div style="color: var(--danger);">Line ${i+1} Orig: ${lineA}</div><div style="color: var(--success);">Line ${i+1} New: ${lineB}</div>`;
+            }
+            document.getElementById("diffResult").innerHTML = diffHtml || "No differences found.";
+        });
+    </script>
+</body>
+</html>

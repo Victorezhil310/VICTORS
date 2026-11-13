@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Live Editor - VICTORS</title>
+    <meta name="description" content="Write Markdown code and view real-time HTML previews online.">
+    <meta name="google-site-verification" content="-nL85juUcE0o48CM-D_4I4YDGWaBoP1PN6BFCYSphl0" />
+    <meta name="google-site-verification" content="FZkuRB-0Q_93gsD0MqGl-AYHHhZEO5352zcOegGGKi4" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo"><i class="fa-solid fa-layer-group logo-icon"></i><span class="logo-text">VICTORS</span></a>
+            <nav class="nav-links"><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></nav>
+        </div>
+    </header>
+
+    <main class="page-container">
+        <h1><i class="fa-brands fa-markdown" style="color: var(--primary-color);"></i> Markdown Live Editor</h1>
+        <p class="subtitle">Type Markdown syntax to generate formatted HTML.</p>
+
+        <div class="tool-box">
+            <textarea id="mdInput" rows="6" class="form-input" placeholder="# Heading&#10;**Bold text** and *italic*"></textarea>
+            <div class="result-box" id="mdResult">Preview will appear here.</div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById("mdInput").addEventListener("input", (e) => {
+            let text = e.target.value;
+            text = text.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+            text = text.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+            text = text.replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>');
+            text = text.replace(/\*(.*)\*/gim, '<em>$1</em>');
+            document.getElementById("mdResult").innerHTML = text;
+        });
+    </script>
+</body>
+</html>

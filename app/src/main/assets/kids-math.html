@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kids Math Challenge - VICTORS</title>
+    <meta name="description" content="Gamified addition, subtraction, and multiplication puzzles for kids. Ad-free & 100% kid safe.">
+    <meta name="google-site-verification" content="-nL85juUcE0o48CM-D_4I4YDGWaBoP1PN6BFCYSphl0" />
+    <meta name="google-site-verification" content="FZkuRB-0Q_93gsD0MqGl-AYHHhZEO5352zcOegGGKi4" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo"><i class="fa-solid fa-layer-group logo-icon"></i><span class="logo-text">VICTORS</span></a>
+            <nav class="nav-links"><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></nav>
+        </div>
+    </header>
+
+    <main class="page-container">
+        <h1><i class="fa-solid fa-child" style="color: var(--success);"></i> Kids Math Challenge</h1>
+        <p class="subtitle">Solve simple math problems and earn trophy badges!</p>
+
+        <div class="tool-box quiz-box">
+            <div class="quiz-question" id="quizQuestion">Loading...</div>
+            <div class="quiz-options">
+                <input type="number" id="quizAnswer" placeholder="Your Answer" class="form-input" style="max-width: 200px;">
+                <button id="btnCheckQuiz" class="btn btn-primary"><i class="fa-solid fa-check"></i> Submit</button>
+            </div>
+            <div class="quiz-feedback" id="quizFeedback"></div>
+        </div>
+    </main>
+
+    <script>
+        let currentSolution = 0;
+        function generateQuiz() {
+            const n1 = Math.floor(Math.random() * 15) + 1;
+            const n2 = Math.floor(Math.random() * 15) + 1;
+            currentSolution = n1 + n2;
+            document.getElementById("quizQuestion").textContent = `What is ${n1} + ${n2} ?`;
+            document.getElementById("quizAnswer").value = "";
+        }
+
+        document.getElementById("btnCheckQuiz").addEventListener("click", () => {
+            const ans = parseInt(document.getElementById("quizAnswer").value.trim(), 10);
+            const feedback = document.getElementById("quizFeedback");
+            if (isNaN(ans)) { feedback.innerHTML = `<span style="color: var(--danger);">Type an answer number above!</span>`; return; }
+
+            if (ans === currentSolution) {
+                feedback.innerHTML = `<span style="color: var(--success); font-weight: 700;"><i class="fa-solid fa-trophy"></i> Great Job! Correct Answer!</span>`;
+                setTimeout(generateQuiz, 1500);
+            } else {
+                feedback.innerHTML = `<span style="color: var(--danger);"><i class="fa-solid fa-xmark"></i> Not ${ans}. Try again!</span>`;
+            }
+        });
+
+        generateQuiz();
+    </script>
+</body>
+</html>

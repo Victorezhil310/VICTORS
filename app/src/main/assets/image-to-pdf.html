@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image to PDF Converter - VICTORS</title>
+    <meta name="description" content="Convert PNG, JPG, JPEG, and WEBP images to PDF documents for free online with instant download.">
+    <!-- Google Verification -->
+    <meta name="google-site-verification" content="-nL85juUcE0o48CM-D_4I4YDGWaBoP1PN6BFCYSphl0" />
+    <meta name="google-site-verification" content="FZkuRB-0Q_93gsD0MqGl-AYHHhZEO5352zcOegGGKi4" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-layer-group logo-icon"></i>
+                <span class="logo-text">VICTORS</span>
+            </a>
+            <nav class="nav-links">
+                <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+                <a href="privacy.html"><i class="fa-solid fa-shield-halved"></i> Privacy</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="page-container">
+        <h1><i class="fa-solid fa-file-image" style="color: var(--danger);"></i> Image to PDF Converter</h1>
+        <p class="subtitle">Select photos (.jpg, .png, .webp) to merge into a single downloadable PDF document.</p>
+
+        <div class="tool-box">
+            <input type="file" id="imgFileInput" accept="image/*" multiple class="file-input">
+            <div id="imagePreviewContainer" style="display: flex; flex-wrap: wrap; gap: 0.8rem; margin: 0.8rem 0;"></div>
+
+            <div class="tool-controls" style="display: flex; gap: 0.8rem;">
+                <button id="btnConvertImgToPdf" class="btn btn-primary"><i class="fa-solid fa-file-pdf"></i> Convert & Download PDF</button>
+                <button id="btnClearImages" class="btn btn-secondary"><i class="fa-solid fa-trash"></i> Remove Images</button>
+            </div>
+            <div class="pdf-output-area" id="imgPdfOutput">
+                <em>Select images above to convert into PDF.</em>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p>&copy; 2025 VICTORS. Image to PDF Utility.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        let loadedImageFiles = [];
+        const imgFileInput = document.getElementById("imgFileInput");
+        const imagePreviewContainer = document.getElementById("imagePreviewContainer");
+        const btnConvertImgToPdf = document.getElementById("btnConvertImgToPdf");
+        const btnClearImages = document.getElementById("btnClearImages");
+        const imgPdfOutput = document.getElementById("imgPdfOutput");
+
+        if (imgFileInput) {
+            imgFileInput.addEventListener("change", (e) => {
+                const files = Array.from(e.target.files);
+                files.forEach(file => { if (file.type.startsWith("image/")) loadedImageFiles.push(file); });
+                renderImagePreviews();
+            });
+        }
+
+        function renderImagePreviews() {
+            if (!imagePreviewContainer) return;
+            imagePreviewContainer.innerHTML = "";
+            if (loadedImageFiles.length === 0) {
+                imagePreviewContainer.innerHTML = `<span style="color: var(--text-muted); font-size: 0.85rem;">No images selected yet.</span>`;
+                return;
+            }
+            loadedImageFiles.forEach((file, index) => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const wrapper = document.createElement("div");
+                    wrapper.style.cssText = "position: relative; width: 80px; height: 80px; border-radius: 8px; overflow: hidden; border: 2px solid var(--card-border);";
+                    wrapper.innerHTML = `
+                        <img src="${e.target.result}" style="width: 100%; height: 100%; object-fit: cover;">
+                        <button onclick="removeImageAt(${index})" style="position: absolute; top: 2px; right: 2px; background: rgba(239, 68, 68, 0.9); color: white; border: none; width: 20px; height: 20px; border-radius: 50%; cursor: pointer; font-size: 10px;">&times;</button>
+                    `;
+                    imagePreviewContainer.appendChild(wrapper);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        window.removeImageAt = function(index) {
+            loadedImageFiles.splice(index, 1);
+            renderImagePreviews();
+        };
+
+        if (btnClearImages) {
+            btnClearImages.addEventListener("click", () => {
+                loadedImageFiles = [];
+                if (imgFileInput) imgFileInput.value = "";
+                renderImagePreviews();
+                imgPdfOutput.innerHTML = `<em>Selected images cleared.</em>`;
+            });
+        }
+
+        if (btnConvertImgToPdf) {
+            btnConvertImgToPdf.addEventListener("click", () => {
+                if (loadedImageFiles.length === 0) {
+                    imgPdfOutput.innerHTML = `<span style="color: var(--danger);">Please select at least one image file.</span>`;
+                    return;
+                }
+                const { jsPDF } = window.jspdf || {};
+                if (!jsPDF) return;
+
+                const doc = new jsPDF();
+                let count = 0;
+                loadedImageFiles.forEach((file, idx) => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const img = new Image();
+                        img.src = e.target.result;
+                        img.onload = function() {
+                            if (idx > 0) doc.addPage();
+                            const pw = doc.internal.pageSize.getWidth();
+                            const ph = doc.internal.pageSize.getHeight();
+                            const r = Math.min(pw / img.width, ph / img.height);
+                            const w = img.width * r;
+                            const h = img.height * r;
+                            doc.addImage(img, 'JPEG', (pw - w) / 2, (ph - h) / 2, w, h);
+                            count++;
+                            if (count === loadedImageFiles.length) {
+                                doc.save("victors_converted_images.pdf");
+                                imgPdfOutput.innerHTML = `<span style="color: var(--success); font-weight: 700;"><i class="fa-solid fa-check"></i> Downloaded victors_converted_images.pdf!</span>`;
+                            }
+                        };
+                    };
+                    reader.readAsDataURL(file);
+                });
+            });
+        }
+    </script>
+</body>
+</html>

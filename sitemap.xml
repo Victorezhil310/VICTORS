@@ -4,38 +4,36 @@
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
                             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
     <!-- Main Vercel Web Portal -->
-    <url>
-        <loc>https://victors-plum.vercel.app/</loc>
-        <lastmod>2025-01-01</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>1.0</priority>
-    </url>
-    <!-- Privacy Policy Page -->
-    <url>
-        <loc>https://victors-plum.vercel.app/privacy.html</loc>
-        <lastmod>2025-01-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <!-- Terms of Service Page -->
-    <url>
-        <loc>https://victors-plum.vercel.app/terms.html</loc>
-        <lastmod>2025-01-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <!-- Ratings Page -->
-    <url>
-        <loc>https://victors-plum.vercel.app/ratings.html</loc>
-        <lastmod>2025-01-01</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <!-- AdSense Verification File -->
-    <url>
-        <loc>https://victors-plum.vercel.app/ads.txt</loc>
-        <lastmod>2025-01-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.5</priority>
-    </url>
+    <url><loc>https://victors-plum.vercel.app/</loc><lastmod>2025-01-01</lastmod><priority>1.0</priority></url>
+    <url><loc>https://victors-plum.vercel.app/privacy.html</loc><lastmod>2025-01-01</lastmod><priority>0.8</priority></url>
+    <url><loc>https://victors-plum.vercel.app/terms.html</loc><lastmod>2025-01-01</lastmod><priority>0.8</priority></url>
+    <url><loc>https://victors-plum.vercel.app/ratings.html</loc><lastmod>2025-01-01</lastmod><priority>0.8</priority></url>
+    <url><loc>https://victors-plum.vercel.app/ads.txt</loc><lastmod>2025-01-01</lastmod><priority>0.5</priority></url>
+
+    <!-- 25 Standalone Real Tool Pages -->
+    <url><loc>https://victors-plum.vercel.app/image-to-pdf.html</loc><lastmod>2025-01-01</lastmod><priority>0.9</priority></url>
+    <url><loc>https://victors-plum.vercel.app/pdf-editor.html</loc><lastmod>2025-01-01</lastmod><priority>0.9</priority></url>
+    <url><loc>https://victors-plum.vercel.app/gpa-calculator.html</loc><lastmod>2025-01-01</lastmod><priority>0.9</priority></url>
+    <url><loc>https://victors-plum.vercel.app/qr-generator.html</loc><lastmod>2025-01-01</lastmod><priority>0.9</priority></url>
+    <url><loc>https://victors-plum.vercel.app/word-counter.html</loc><lastmod>2025-01-01</lastmod><priority>0.8</priority></url>
+    <url><loc>https://victors-plum.vercel.app/kids-math.html</loc><lastmod>2025-01-01</lastmod><priority>0.8</priority></url>
+    <url><loc>https://victors-plum.vercel.app/unit-converter.html</loc><lastmod>2025-01-01</lastmod><priority>0.8</priority></url>
+    <url><loc>https://victors-plum.vercel.app/password-generator.html</loc><lastmod>2025-01-01</lastmod><priority>0.8</priority></url>
+    <url><loc>https://victors-plum.vercel.app/scientific-calculator.html</loc><lastmod>2025-01-01</lastmod><priority>0.8</priority></url>
+    <url><loc>https://victors-plum.vercel.app/bmi-calculator.html</loc><lastmod>2025-01-01</lastmod><priority>0.8</priority></url>
+    <url><loc>https://victors-plum.vercel.app/loan-calculator.html</loc><lastmod>2025-01-01</lastmod><priority>0.8</priority></url>
+    <url><loc>https://victors-plum.vercel.app/age-calculator.html</loc><lastmod>2025-01-01</lastmod><priority>0.8</priority></url>
+    <url><loc>https://victors-plum.vercel.app/json-formatter.html</loc><lastmod>2025-01-01</lastmod><priority>0.8</priority></url>
+    <url><loc>https://victors-plum.vercel.app/pomodoro-timer.html</loc><lastmod>2025-01-01</lastmod><priority>0.8</priority></url>
+    <url><loc>https://victors-plum.vercel.app/color-picker.html</loc><lastmod>2025-01-01</lastmod><priority>0.8</priority></url>
+    <url><loc>https://victors-plum.vercel.app/base64-encoder.html</loc><lastmod>2025-01-01</lastmod><priority>0.8</priority></url>
+    <url><loc>https://victors-plum.vercel.app/stopwatch.html</loc><lastmod>2025-01-01</lastmod><priority>0.8</priority></url>
+    <url><loc>https://victors-plum.vercel.app/currency-converter.html</loc><lastmod>2025-01-01</lastmod><priority>0.8</priority></url>
+    <url><loc>https://victors-plum.vercel.app/markdown-editor.html</loc><lastmod>2025-01-01</lastmod><priority>0.8</priority></url>
+    <url><loc>https://victors-plum.vercel.app/task-kanban.html</loc><lastmod>2025-01-01</lastmod><priority>0.8</priority></url>
+    <url><loc>https://victors-plum.vercel.app/habit-tracker.html</loc><lastmod>2025-01-01</lastmod><priority>0.8</priority></url>
+    <url><loc>https://victors-plum.vercel.app/flashcard-maker.html</loc><lastmod>2025-01-01</lastmod><priority>0.8</priority></url>
+    <url><loc>https://victors-plum.vercel.app/diff-checker.html</loc><lastmod>2025-01-01</lastmod><priority>0.8</priority></url>
+    <url><loc>https://victors-plum.vercel.app/csv-to-json.html</loc><lastmod>2025-01-01</lastmod><priority>0.8</priority></url>
+    <url><loc>https://victors-plum.vercel.app/text-summarizer.html</loc><lastmod>2025-01-01</lastmod><priority>0.8</priority></url>
 </urlset>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF & Text Online Editor - VICTORS</title>
+    <meta name="description" content="Edit document text online, convert letter case, remove duplicate or unwanted lines, and download TXT files instantly.">
+    <meta name="google-site-verification" content="-nL85juUcE0o48CM-D_4I4YDGWaBoP1PN6BFCYSphl0" />
+    <meta name="google-site-verification" content="FZkuRB-0Q_93gsD0MqGl-AYHHhZEO5352zcOegGGKi4" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-layer-group logo-icon"></i>
+                <span class="logo-text">VICTORS</span>
+            </a>
+            <nav class="nav-links"><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></nav>
+        </div>
+    </header>
+
+    <main class="page-container">
+        <h1><i class="fa-solid fa-pen-to-square" style="color: var(--secondary-color);"></i> PDF & Text Online Editor</h1>
+        <p class="subtitle">Upload or paste document text to edit, clean unwanted lines, and export online.</p>
+
+        <div class="tool-box">
+            <input type="file" id="docFileInput" accept=".txt,.csv,.json" class="file-input">
+            <textarea id="editorTextArea" rows="8" class="form-input" placeholder="Paste or type document text here..."></textarea>
+
+            <div class="tool-controls" style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
+                <button id="btnUppercase" class="btn btn-secondary btn-sm">UPPERCASE</button>
+                <button id="btnLowercase" class="btn btn-secondary btn-sm">lowercase</button>
+                <button id="btnRemoveDuplicates" class="btn btn-secondary btn-sm"><i class="fa-solid fa-filter"></i> Remove Duplicate Lines</button>
+                <button id="btnDownloadText" class="btn btn-primary btn-sm"><i class="fa-solid fa-download"></i> Download Edited File (.txt)</button>
+            </div>
+            <div class="result-box" id="editorStats">
+                <strong>Stats:</strong> 0 Words | 0 Characters | 0 Lines
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const docFileInput = document.getElementById("docFileInput");
+        const editorTextArea = document.getElementById("editorTextArea");
+        const btnUppercase = document.getElementById("btnUppercase");
+        const btnLowercase = document.getElementById("btnLowercase");
+        const btnRemoveDuplicates = document.getElementById("btnRemoveDuplicates");
+        const btnDownloadText = document.getElementById("btnDownloadText");
+        const editorStats = document.getElementById("editorStats");
+
+        function updateStats() {
+            const text = editorTextArea.value;
+            const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+            const chars = text.length;
+            const lines = text ? text.split("\n").length : 0;
+            editorStats.innerHTML = `<strong>Stats:</strong> ${words} Words | ${chars} Characters | ${lines} Lines`;
+        }
+
+        if (editorTextArea) editorTextArea.addEventListener("input", updateStats);
+
+        if (docFileInput) {
+            docFileInput.addEventListener("change", (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    editorTextArea.value = evt.target.result;
+                    updateStats();
+                };
+                reader.readAsText(file);
+            });
+        }
+
+        btnUppercase.addEventListener("click", () => { editorTextArea.value = editorTextArea.value.toUpperCase(); updateStats(); });
+        btnLowercase.addEventListener("click", () => { editorTextArea.value = editorTextArea.value.toLowerCase(); updateStats(); });
+        btnRemoveDuplicates.addEventListener("click", () => {
+            const lines = editorTextArea.value.split("\n");
+            const unique = Array.from(new Set(lines.map(l => l.trim()))).filter(l => l.length > 0);
+            editorTextArea.value = unique.join("\n");
+            updateStats();
+        });
+        btnDownloadText.addEventListener("click", () => {
+            const content = editorTextArea.value;
+            if (!content.trim()) return alert("Editor is empty!");
+            const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "victors_edited_document.txt";
+            link.click();
+        });
+    </script>
+</body>
+</html>

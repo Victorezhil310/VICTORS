@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word & Character Counter - VICTORS</title>
+    <meta name="description" content="Count words, characters, sentences, paragraphs, and reading time online.">
+    <meta name="google-site-verification" content="-nL85juUcE0o48CM-D_4I4YDGWaBoP1PN6BFCYSphl0" />
+    <meta name="google-site-verification" content="FZkuRB-0Q_93gsD0MqGl-AYHHhZEO5352zcOegGGKi4" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo"><i class="fa-solid fa-layer-group logo-icon"></i><span class="logo-text">VICTORS</span></a>
+            <nav class="nav-links"><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></nav>
+        </div>
+    </header>
+
+    <main class="page-container">
+        <h1><i class="fa-solid fa-font" style="color: var(--accent-color);"></i> Word & Character Counter</h1>
+        <p class="subtitle">Type or paste text to analyze word length, reading time, and sentence count.</p>
+
+        <div class="tool-box">
+            <textarea id="counterInput" rows="8" class="form-input" placeholder="Type or paste text here..."></textarea>
+            <div class="result-box" id="counterStats">
+                <strong>Words:</strong> 0 | <strong>Characters:</strong> 0 | <strong>Sentences:</strong> 0 | <strong>Reading Time:</strong> 0 sec
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById("counterInput").addEventListener("input", (e) => {
+            const text = e.target.value;
+            const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+            const chars = text.length;
+            const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0).length;
+            const readTime = Math.ceil(words / 200 * 60);
+
+            document.getElementById("counterStats").innerHTML = `
+                <strong>Words:</strong> ${words} | <strong>Characters:</strong> ${chars} | <strong>Sentences:</strong> ${sentences} | <strong>Reading Time:</strong> ~${readTime} sec
+            `;
+        });
+    </script>
+</body>
+</html>

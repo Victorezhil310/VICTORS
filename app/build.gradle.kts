@@ -12,8 +12,8 @@ android {
         applicationId = "com.victors.app"
         minSdk = 24
         targetSdk = 34
-        versionCode = 1001
-        versionName = "1.0.0.1"
+        versionCode = 1002
+        versionName = "1.0.0.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders["appName"] = "VICTORS"

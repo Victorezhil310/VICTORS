@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.victors.app",
+      "sha256_cert_fingerprints": [
+        "47:1B:11:E4:22:94:A3:9B:64:4C:29:1F:21:81:29:CB:29:16:76:B3:0F:F6:25:75:8F:94:84:93:29:AC:04:48"
+      ]
+    }
+  }
+]

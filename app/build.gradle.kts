@@ -6,14 +6,14 @@ plugins {
 
 android {
     namespace = "com.victors.app"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.victors.app"
         minSdk = 24
-        targetSdk = 34
-        versionCode = 1002
-        versionName = "1.0.0.2"
+        targetSdk = 36
+        versionCode = 1003
+        versionName = "1.0.0.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders["appName"] = "VICTORS"

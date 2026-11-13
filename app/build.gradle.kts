@@ -12,7 +12,7 @@ android {
         applicationId = "com.victors.app"
         minSdk = 24
         targetSdk = 36
-        versionCode = 2001
+        versionCode = 2002
         versionName = "1.0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -68,4 +68,7 @@ dependencies {
     // Firebase BoM & Analytics Integration
     implementation(platform("com.google.firebase:firebase-bom:33.9.0"))
     implementation("com.google.firebase:firebase-analytics")
+
+    // Google Mobile Ads (AdMob) SDK
+    implementation("com.google.android.gms:play-services-ads:23.6.0")
 }

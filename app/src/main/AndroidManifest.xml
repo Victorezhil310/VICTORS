@@ -2,15 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Network & File Permissions for PDF and Web Tools -->
+    <!-- Network & File Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
 
-    <!-- Universal Device Hardware Capabilities (Phone, Tablet, Desktop, Chromebook, XR) -->
+    <!-- Universal Hardware Capabilities (Phone, Tablet, Desktop, Chromebook, XR) -->
     <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
     <uses-feature android:name="android.hardware.camera" android:required="false" />
-    <!-- Android XR / Spatial Computing compatibility declaration -->
+    <!-- Android XR / Spatial Computing compatibility -->
     <uses-feature android:name="android.software.xr.immersive" android:required="false" />
 
     <application
@@ -25,6 +25,11 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
 
+        <!-- Google AdMob App ID Metadata -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713"/>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -38,12 +43,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-            <!-- App Links & Web Intents -->
+            <!-- App Links & Web Intents for Vercel -->
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="https" android:host="victorezhil310.github.io" android:pathPrefix="/VICTORS" />
+                <data android:scheme="https" android:host="victors-plum.vercel.app" />
             </intent-filter>
         </activity>
 
